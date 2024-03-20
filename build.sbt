@@ -42,10 +42,13 @@ resolvers ++= Seq(
 
 // Provide a managed dependency on X if -DXVersion="" is supplied on the command line.
 val defaultVersions = Map(
-  "chisel3" -> "3.4.3",
+  "chisel3" -> "3.5.6",
   "chisel-iotesters" -> "1.5.+",
-  "hardfloat" -> "1.3-SNAPSHOT"
+  "hardfloat" -> "1.5-SNAPSHOT"
   )
+addCompilerPlugin("edu.berkeley.cs" % "chisel3-plugin" % "3.5.6" cross CrossVersion.full)
+
+
 
 libraryDependencies ++= Seq("chisel3","chisel-iotesters","hardfloat").map {
   dep: String => "edu.berkeley.cs" %% dep % sys.props.getOrElse(dep + "Version", defaultVersions(dep)) }

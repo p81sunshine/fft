@@ -15,7 +15,7 @@ trait Config {
     case 64 => 53
   }
 
-  val float_point_format = 16   // support 16, 32, 64
+  val float_point_format = 32   // support 16, 32, 64
   val expWidth = exp(float_point_format)
   val sigWidth = sig(float_point_format)
   val use_float = true //当use_float=true时使用浮点数, 否则使用定点数
@@ -27,7 +27,7 @@ trait Config {
 // support all parallel data (datalength = 1)
 // FFTstage - FFTparallel must > 0
   val radix = 2  //radix of the FFT,supprot 2, 4, 8
-  val FFTstage = 8 // FFT stages
+  val FFTstage = 2 // FFT stages
   val FFTparallel = 0 // the really parallel is radix ^ FFTparallel
   val useGauss = false // whether use gauss multiplier
   val do_reorder = false // true: output is one bit serial and all in order
