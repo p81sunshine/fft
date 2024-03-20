@@ -20,8 +20,8 @@ trait Config {
   val sigWidth = sig(float_point_format)
   val use_float = true //当use_float=true时使用浮点数, 否则使用定点数
 //config of fixedpoint data format
-  val FixDataWidth = 26
-  val BinaryPoint = 10
+  val FixDataWidth = 32
+  val BinaryPoint = 16
 
 // config of construct
 // support all parallel data (datalength = 1)

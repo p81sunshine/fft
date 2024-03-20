@@ -177,10 +177,23 @@ class FFT extends Module with Config{
   }
   io.busy := busy
   io.dout_valid := RegNext(cnt(0)) === (FFTparallel + datalength - 1).asUInt()
+  println(s"FFTparallel is ${FFTparallel}\n")
+  println(s"datalength is ${datalength}\n")
+  printf(p"dout_valid is ${io.dout_valid}\n")
+  printf(p"cnt is ${cnt(0)}\n")
   if(use_float) {
     io.dOut := (0 until radix * FFTparallel_r).map(i => RegNext(ComplexDecode(datao(i).asTypeOf(new MyFloatComplex))))
   }
   else {
     io.dOut := RegNext(datao)
+  }
+
+  for (i <- 0 until radix * FFTparallel_r) {
+    printf(p"the din is ${io.dIn(i).re}\n")
+    printf(p"din_valid is ${io.din_valid}\n")
+  }
+
+  for (i <- 0 until radix * FFTparallel_r) {
+    printf(p"the dout is ${io.dOut(i).re}\n")
   }
 }
