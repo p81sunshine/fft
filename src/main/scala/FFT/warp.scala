@@ -241,14 +241,14 @@ class fft_wrap extends Module with Config{
 	val vec_entry = RegInit(VecInit(Seq.fill(8)(0.U(32.W))))
 	/* WB */
 	when (state3 === s3_2 && state2 === s3){ {
-		vec_entry(0) := io.m_axi_gmem_RDATA(31,0)
-		vec_entry(1) := io.m_axi_gmem_RDATA(63,32)
-		vec_entry(2) := io.m_axi_gmem_RDATA(95,64)
-		vec_entry(3) := io.m_axi_gmem_RDATA(127,96)
-		vec_entry(4) := io.m_axi_gmem_RDATA(159,128)
-		vec_entry(5) := io.m_axi_gmem_RDATA(191,160)
-		vec_entry(6) := io.m_axi_gmem_RDATA(223,192)
-		vec_entry(7) := io.m_axi_gmem_RDATA(255,224)
+		vec_entry(0) := FFTtop_u.io.dOut(0).re
+		vec_entry(1) := FFTtop_u.io.dOut(0).im
+		vec_entry(2) := FFTtop_u.io.dOut(1).re
+		vec_entry(3) := FFTtop_u.io.dOut(1).im
+		vec_entry(4) := FFTtop_u.io.dOut(2).re
+		vec_entry(5) := FFTtop_u.io.dOut(2).im
+		vec_entry(6) := FFTtop_u.io.dOut(3).re
+		vec_entry(7) := FFTtop_u.io.dOut(3).im
 		cnt := cnt - 1.U
 	}}
 
