@@ -906,7 +906,530 @@ module ButterflyAdd(
   assign io_out_1_inst_io_op2_re = io_in_1_re; // @[Modules.scala 102:17]
   assign io_out_1_inst_io_op2_im = io_in_1_im; // @[Modules.scala 102:17]
 endmodule
+module Exchange(
+  input  [32:0] io_in_0_0_re,
+  input  [32:0] io_in_0_0_im,
+  input  [32:0] io_in_0_1_re,
+  input  [32:0] io_in_0_1_im,
+  input  [32:0] io_in_1_0_re,
+  input  [32:0] io_in_1_0_im,
+  input  [32:0] io_in_1_1_re,
+  input  [32:0] io_in_1_1_im,
+  output [32:0] io_out_0_0_re,
+  output [32:0] io_out_0_0_im,
+  output [32:0] io_out_0_1_re,
+  output [32:0] io_out_0_1_im,
+  output [32:0] io_out_1_0_re,
+  output [32:0] io_out_1_0_im,
+  output [32:0] io_out_1_1_re,
+  output [32:0] io_out_1_1_im
+);
+  assign io_out_0_0_re = io_in_0_0_re; // @[Modules.scala 324:20]
+  assign io_out_0_0_im = io_in_0_0_im; // @[Modules.scala 324:20]
+  assign io_out_0_1_re = io_in_1_0_re; // @[Modules.scala 324:20]
+  assign io_out_0_1_im = io_in_1_0_im; // @[Modules.scala 324:20]
+  assign io_out_1_0_re = io_in_0_1_re; // @[Modules.scala 324:20]
+  assign io_out_1_0_im = io_in_0_1_im; // @[Modules.scala 324:20]
+  assign io_out_1_1_re = io_in_1_1_re; // @[Modules.scala 324:20]
+  assign io_out_1_1_im = io_in_1_1_im; // @[Modules.scala 324:20]
+endmodule
 module Switch(
+  input         clock,
+  input  [32:0] io_in_0_re,
+  input  [32:0] io_in_0_im,
+  input  [32:0] io_in_1_re,
+  input  [32:0] io_in_1_im,
+  output [32:0] io_out_0_re,
+  output [32:0] io_out_0_im,
+  output [32:0] io_out_1_re,
+  output [32:0] io_out_1_im,
+  input         io_sel
+);
+`ifdef RANDOMIZE_REG_INIT
+  reg [63:0] _RAND_0;
+  reg [63:0] _RAND_1;
+  reg [63:0] _RAND_2;
+  reg [63:0] _RAND_3;
+  reg [63:0] _RAND_4;
+  reg [63:0] _RAND_5;
+  reg [63:0] _RAND_6;
+  reg [63:0] _RAND_7;
+  reg [63:0] _RAND_8;
+  reg [63:0] _RAND_9;
+  reg [63:0] _RAND_10;
+  reg [63:0] _RAND_11;
+  reg [63:0] _RAND_12;
+  reg [63:0] _RAND_13;
+  reg [63:0] _RAND_14;
+  reg [63:0] _RAND_15;
+  reg [63:0] _RAND_16;
+  reg [63:0] _RAND_17;
+  reg [63:0] _RAND_18;
+  reg [63:0] _RAND_19;
+  reg [63:0] _RAND_20;
+  reg [63:0] _RAND_21;
+  reg [63:0] _RAND_22;
+  reg [63:0] _RAND_23;
+  reg [63:0] _RAND_24;
+  reg [63:0] _RAND_25;
+  reg [63:0] _RAND_26;
+  reg [63:0] _RAND_27;
+  reg [63:0] _RAND_28;
+  reg [63:0] _RAND_29;
+  reg [63:0] _RAND_30;
+  reg [63:0] _RAND_31;
+`endif // RANDOMIZE_REG_INIT
+  reg [32:0] swdata_1_r_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_im; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_1_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_1_im; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_2_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_2_im; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_3_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_3_im; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_4_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_4_im; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_5_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_5_im; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_6_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_6_im; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_7_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_7_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_1_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_1_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_2_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_2_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_3_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_3_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_4_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_4_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_5_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_5_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_6_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_6_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_7_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_7_im; // @[Reg.scala 19:16]
+  assign io_out_0_re = io_out_0_r_7_re; // @[Modules.scala 306:38]
+  assign io_out_0_im = io_out_0_r_7_im; // @[Modules.scala 306:38]
+  assign io_out_1_re = io_sel ? io_in_0_re : swdata_1_r_7_re; // @[Modules.scala 306:{38,38}]
+  assign io_out_1_im = io_sel ? io_in_0_im : swdata_1_r_7_im; // @[Modules.scala 306:{38,38}]
+  always @(posedge clock) begin
+    swdata_1_r_re <= io_in_1_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_im <= io_in_1_im; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_1_re <= swdata_1_r_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_1_im <= swdata_1_r_im; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_2_re <= swdata_1_r_1_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_2_im <= swdata_1_r_1_im; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_3_re <= swdata_1_r_2_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_3_im <= swdata_1_r_2_im; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_4_re <= swdata_1_r_3_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_4_im <= swdata_1_r_3_im; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_5_re <= swdata_1_r_4_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_5_im <= swdata_1_r_4_im; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_6_re <= swdata_1_r_5_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_6_im <= swdata_1_r_5_im; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_7_re <= swdata_1_r_6_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_7_im <= swdata_1_r_6_im; // @[Reg.scala 19:16 20:{18,22}]
+    if (io_sel) begin // @[Reg.scala 20:22]
+      io_out_0_r_re <= swdata_1_r_7_re; // @[Reg.scala 20:22]
+    end else begin
+      io_out_0_r_re <= io_in_0_re;
+    end
+    if (io_sel) begin // @[Reg.scala 20:22]
+      io_out_0_r_im <= swdata_1_r_7_im; // @[Reg.scala 20:22]
+    end else begin
+      io_out_0_r_im <= io_in_0_im;
+    end
+    io_out_0_r_1_re <= io_out_0_r_re; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_1_im <= io_out_0_r_im; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_2_re <= io_out_0_r_1_re; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_2_im <= io_out_0_r_1_im; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_3_re <= io_out_0_r_2_re; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_3_im <= io_out_0_r_2_im; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_4_re <= io_out_0_r_3_re; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_4_im <= io_out_0_r_3_im; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_5_re <= io_out_0_r_4_re; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_5_im <= io_out_0_r_4_im; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_6_re <= io_out_0_r_5_re; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_6_im <= io_out_0_r_5_im; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_7_re <= io_out_0_r_6_re; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_7_im <= io_out_0_r_6_im; // @[Reg.scala 19:16 20:{18,22}]
+  end
+// Register and memory initialization
+`ifdef RANDOMIZE_GARBAGE_ASSIGN
+`define RANDOMIZE
+`endif
+`ifdef RANDOMIZE_INVALID_ASSIGN
+`define RANDOMIZE
+`endif
+`ifdef RANDOMIZE_REG_INIT
+`define RANDOMIZE
+`endif
+`ifdef RANDOMIZE_MEM_INIT
+`define RANDOMIZE
+`endif
+`ifndef RANDOM
+`define RANDOM $random
+`endif
+`ifdef RANDOMIZE_MEM_INIT
+  integer initvar;
+`endif
+`ifndef SYNTHESIS
+`ifdef FIRRTL_BEFORE_INITIAL
+`FIRRTL_BEFORE_INITIAL
+`endif
+initial begin
+  `ifdef RANDOMIZE
+    `ifdef INIT_RANDOM
+      `INIT_RANDOM
+    `endif
+    `ifndef VERILATOR
+      `ifdef RANDOMIZE_DELAY
+        #`RANDOMIZE_DELAY begin end
+      `else
+        #0.002 begin end
+      `endif
+    `endif
+`ifdef RANDOMIZE_REG_INIT
+  _RAND_0 = {2{`RANDOM}};
+  swdata_1_r_re = _RAND_0[32:0];
+  _RAND_1 = {2{`RANDOM}};
+  swdata_1_r_im = _RAND_1[32:0];
+  _RAND_2 = {2{`RANDOM}};
+  swdata_1_r_1_re = _RAND_2[32:0];
+  _RAND_3 = {2{`RANDOM}};
+  swdata_1_r_1_im = _RAND_3[32:0];
+  _RAND_4 = {2{`RANDOM}};
+  swdata_1_r_2_re = _RAND_4[32:0];
+  _RAND_5 = {2{`RANDOM}};
+  swdata_1_r_2_im = _RAND_5[32:0];
+  _RAND_6 = {2{`RANDOM}};
+  swdata_1_r_3_re = _RAND_6[32:0];
+  _RAND_7 = {2{`RANDOM}};
+  swdata_1_r_3_im = _RAND_7[32:0];
+  _RAND_8 = {2{`RANDOM}};
+  swdata_1_r_4_re = _RAND_8[32:0];
+  _RAND_9 = {2{`RANDOM}};
+  swdata_1_r_4_im = _RAND_9[32:0];
+  _RAND_10 = {2{`RANDOM}};
+  swdata_1_r_5_re = _RAND_10[32:0];
+  _RAND_11 = {2{`RANDOM}};
+  swdata_1_r_5_im = _RAND_11[32:0];
+  _RAND_12 = {2{`RANDOM}};
+  swdata_1_r_6_re = _RAND_12[32:0];
+  _RAND_13 = {2{`RANDOM}};
+  swdata_1_r_6_im = _RAND_13[32:0];
+  _RAND_14 = {2{`RANDOM}};
+  swdata_1_r_7_re = _RAND_14[32:0];
+  _RAND_15 = {2{`RANDOM}};
+  swdata_1_r_7_im = _RAND_15[32:0];
+  _RAND_16 = {2{`RANDOM}};
+  io_out_0_r_re = _RAND_16[32:0];
+  _RAND_17 = {2{`RANDOM}};
+  io_out_0_r_im = _RAND_17[32:0];
+  _RAND_18 = {2{`RANDOM}};
+  io_out_0_r_1_re = _RAND_18[32:0];
+  _RAND_19 = {2{`RANDOM}};
+  io_out_0_r_1_im = _RAND_19[32:0];
+  _RAND_20 = {2{`RANDOM}};
+  io_out_0_r_2_re = _RAND_20[32:0];
+  _RAND_21 = {2{`RANDOM}};
+  io_out_0_r_2_im = _RAND_21[32:0];
+  _RAND_22 = {2{`RANDOM}};
+  io_out_0_r_3_re = _RAND_22[32:0];
+  _RAND_23 = {2{`RANDOM}};
+  io_out_0_r_3_im = _RAND_23[32:0];
+  _RAND_24 = {2{`RANDOM}};
+  io_out_0_r_4_re = _RAND_24[32:0];
+  _RAND_25 = {2{`RANDOM}};
+  io_out_0_r_4_im = _RAND_25[32:0];
+  _RAND_26 = {2{`RANDOM}};
+  io_out_0_r_5_re = _RAND_26[32:0];
+  _RAND_27 = {2{`RANDOM}};
+  io_out_0_r_5_im = _RAND_27[32:0];
+  _RAND_28 = {2{`RANDOM}};
+  io_out_0_r_6_re = _RAND_28[32:0];
+  _RAND_29 = {2{`RANDOM}};
+  io_out_0_r_6_im = _RAND_29[32:0];
+  _RAND_30 = {2{`RANDOM}};
+  io_out_0_r_7_re = _RAND_30[32:0];
+  _RAND_31 = {2{`RANDOM}};
+  io_out_0_r_7_im = _RAND_31[32:0];
+`endif // RANDOMIZE_REG_INIT
+  `endif // RANDOMIZE
+end // initial
+`ifdef FIRRTL_AFTER_INITIAL
+`FIRRTL_AFTER_INITIAL
+`endif
+`endif // SYNTHESIS
+endmodule
+module Switch_2(
+  input         clock,
+  input  [32:0] io_in_0_re,
+  input  [32:0] io_in_0_im,
+  input  [32:0] io_in_1_re,
+  input  [32:0] io_in_1_im,
+  output [32:0] io_out_0_re,
+  output [32:0] io_out_0_im,
+  output [32:0] io_out_1_re,
+  output [32:0] io_out_1_im,
+  input         io_sel
+);
+`ifdef RANDOMIZE_REG_INIT
+  reg [63:0] _RAND_0;
+  reg [63:0] _RAND_1;
+  reg [63:0] _RAND_2;
+  reg [63:0] _RAND_3;
+  reg [63:0] _RAND_4;
+  reg [63:0] _RAND_5;
+  reg [63:0] _RAND_6;
+  reg [63:0] _RAND_7;
+  reg [63:0] _RAND_8;
+  reg [63:0] _RAND_9;
+  reg [63:0] _RAND_10;
+  reg [63:0] _RAND_11;
+  reg [63:0] _RAND_12;
+  reg [63:0] _RAND_13;
+  reg [63:0] _RAND_14;
+  reg [63:0] _RAND_15;
+`endif // RANDOMIZE_REG_INIT
+  reg [32:0] swdata_1_r_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_im; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_1_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_1_im; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_2_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_2_im; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_3_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_3_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_1_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_1_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_2_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_2_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_3_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_3_im; // @[Reg.scala 19:16]
+  assign io_out_0_re = io_out_0_r_3_re; // @[Modules.scala 306:38]
+  assign io_out_0_im = io_out_0_r_3_im; // @[Modules.scala 306:38]
+  assign io_out_1_re = io_sel ? io_in_0_re : swdata_1_r_3_re; // @[Modules.scala 306:{38,38}]
+  assign io_out_1_im = io_sel ? io_in_0_im : swdata_1_r_3_im; // @[Modules.scala 306:{38,38}]
+  always @(posedge clock) begin
+    swdata_1_r_re <= io_in_1_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_im <= io_in_1_im; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_1_re <= swdata_1_r_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_1_im <= swdata_1_r_im; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_2_re <= swdata_1_r_1_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_2_im <= swdata_1_r_1_im; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_3_re <= swdata_1_r_2_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_3_im <= swdata_1_r_2_im; // @[Reg.scala 19:16 20:{18,22}]
+    if (io_sel) begin // @[Reg.scala 20:22]
+      io_out_0_r_re <= swdata_1_r_3_re; // @[Reg.scala 20:22]
+    end else begin
+      io_out_0_r_re <= io_in_0_re;
+    end
+    if (io_sel) begin // @[Reg.scala 20:22]
+      io_out_0_r_im <= swdata_1_r_3_im; // @[Reg.scala 20:22]
+    end else begin
+      io_out_0_r_im <= io_in_0_im;
+    end
+    io_out_0_r_1_re <= io_out_0_r_re; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_1_im <= io_out_0_r_im; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_2_re <= io_out_0_r_1_re; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_2_im <= io_out_0_r_1_im; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_3_re <= io_out_0_r_2_re; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_3_im <= io_out_0_r_2_im; // @[Reg.scala 19:16 20:{18,22}]
+  end
+// Register and memory initialization
+`ifdef RANDOMIZE_GARBAGE_ASSIGN
+`define RANDOMIZE
+`endif
+`ifdef RANDOMIZE_INVALID_ASSIGN
+`define RANDOMIZE
+`endif
+`ifdef RANDOMIZE_REG_INIT
+`define RANDOMIZE
+`endif
+`ifdef RANDOMIZE_MEM_INIT
+`define RANDOMIZE
+`endif
+`ifndef RANDOM
+`define RANDOM $random
+`endif
+`ifdef RANDOMIZE_MEM_INIT
+  integer initvar;
+`endif
+`ifndef SYNTHESIS
+`ifdef FIRRTL_BEFORE_INITIAL
+`FIRRTL_BEFORE_INITIAL
+`endif
+initial begin
+  `ifdef RANDOMIZE
+    `ifdef INIT_RANDOM
+      `INIT_RANDOM
+    `endif
+    `ifndef VERILATOR
+      `ifdef RANDOMIZE_DELAY
+        #`RANDOMIZE_DELAY begin end
+      `else
+        #0.002 begin end
+      `endif
+    `endif
+`ifdef RANDOMIZE_REG_INIT
+  _RAND_0 = {2{`RANDOM}};
+  swdata_1_r_re = _RAND_0[32:0];
+  _RAND_1 = {2{`RANDOM}};
+  swdata_1_r_im = _RAND_1[32:0];
+  _RAND_2 = {2{`RANDOM}};
+  swdata_1_r_1_re = _RAND_2[32:0];
+  _RAND_3 = {2{`RANDOM}};
+  swdata_1_r_1_im = _RAND_3[32:0];
+  _RAND_4 = {2{`RANDOM}};
+  swdata_1_r_2_re = _RAND_4[32:0];
+  _RAND_5 = {2{`RANDOM}};
+  swdata_1_r_2_im = _RAND_5[32:0];
+  _RAND_6 = {2{`RANDOM}};
+  swdata_1_r_3_re = _RAND_6[32:0];
+  _RAND_7 = {2{`RANDOM}};
+  swdata_1_r_3_im = _RAND_7[32:0];
+  _RAND_8 = {2{`RANDOM}};
+  io_out_0_r_re = _RAND_8[32:0];
+  _RAND_9 = {2{`RANDOM}};
+  io_out_0_r_im = _RAND_9[32:0];
+  _RAND_10 = {2{`RANDOM}};
+  io_out_0_r_1_re = _RAND_10[32:0];
+  _RAND_11 = {2{`RANDOM}};
+  io_out_0_r_1_im = _RAND_11[32:0];
+  _RAND_12 = {2{`RANDOM}};
+  io_out_0_r_2_re = _RAND_12[32:0];
+  _RAND_13 = {2{`RANDOM}};
+  io_out_0_r_2_im = _RAND_13[32:0];
+  _RAND_14 = {2{`RANDOM}};
+  io_out_0_r_3_re = _RAND_14[32:0];
+  _RAND_15 = {2{`RANDOM}};
+  io_out_0_r_3_im = _RAND_15[32:0];
+`endif // RANDOMIZE_REG_INIT
+  `endif // RANDOMIZE
+end // initial
+`ifdef FIRRTL_AFTER_INITIAL
+`FIRRTL_AFTER_INITIAL
+`endif
+`endif // SYNTHESIS
+endmodule
+module Switch_4(
+  input         clock,
+  input  [32:0] io_in_0_re,
+  input  [32:0] io_in_0_im,
+  input  [32:0] io_in_1_re,
+  input  [32:0] io_in_1_im,
+  output [32:0] io_out_0_re,
+  output [32:0] io_out_0_im,
+  output [32:0] io_out_1_re,
+  output [32:0] io_out_1_im,
+  input         io_sel
+);
+`ifdef RANDOMIZE_REG_INIT
+  reg [63:0] _RAND_0;
+  reg [63:0] _RAND_1;
+  reg [63:0] _RAND_2;
+  reg [63:0] _RAND_3;
+  reg [63:0] _RAND_4;
+  reg [63:0] _RAND_5;
+  reg [63:0] _RAND_6;
+  reg [63:0] _RAND_7;
+`endif // RANDOMIZE_REG_INIT
+  reg [32:0] swdata_1_r_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_im; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_1_re; // @[Reg.scala 19:16]
+  reg [32:0] swdata_1_r_1_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_im; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_1_re; // @[Reg.scala 19:16]
+  reg [32:0] io_out_0_r_1_im; // @[Reg.scala 19:16]
+  assign io_out_0_re = io_out_0_r_1_re; // @[Modules.scala 306:38]
+  assign io_out_0_im = io_out_0_r_1_im; // @[Modules.scala 306:38]
+  assign io_out_1_re = io_sel ? io_in_0_re : swdata_1_r_1_re; // @[Modules.scala 306:{38,38}]
+  assign io_out_1_im = io_sel ? io_in_0_im : swdata_1_r_1_im; // @[Modules.scala 306:{38,38}]
+  always @(posedge clock) begin
+    swdata_1_r_re <= io_in_1_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_im <= io_in_1_im; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_1_re <= swdata_1_r_re; // @[Reg.scala 19:16 20:{18,22}]
+    swdata_1_r_1_im <= swdata_1_r_im; // @[Reg.scala 19:16 20:{18,22}]
+    if (io_sel) begin // @[Reg.scala 20:22]
+      io_out_0_r_re <= swdata_1_r_1_re; // @[Reg.scala 20:22]
+    end else begin
+      io_out_0_r_re <= io_in_0_re;
+    end
+    if (io_sel) begin // @[Reg.scala 20:22]
+      io_out_0_r_im <= swdata_1_r_1_im; // @[Reg.scala 20:22]
+    end else begin
+      io_out_0_r_im <= io_in_0_im;
+    end
+    io_out_0_r_1_re <= io_out_0_r_re; // @[Reg.scala 19:16 20:{18,22}]
+    io_out_0_r_1_im <= io_out_0_r_im; // @[Reg.scala 19:16 20:{18,22}]
+  end
+// Register and memory initialization
+`ifdef RANDOMIZE_GARBAGE_ASSIGN
+`define RANDOMIZE
+`endif
+`ifdef RANDOMIZE_INVALID_ASSIGN
+`define RANDOMIZE
+`endif
+`ifdef RANDOMIZE_REG_INIT
+`define RANDOMIZE
+`endif
+`ifdef RANDOMIZE_MEM_INIT
+`define RANDOMIZE
+`endif
+`ifndef RANDOM
+`define RANDOM $random
+`endif
+`ifdef RANDOMIZE_MEM_INIT
+  integer initvar;
+`endif
+`ifndef SYNTHESIS
+`ifdef FIRRTL_BEFORE_INITIAL
+`FIRRTL_BEFORE_INITIAL
+`endif
+initial begin
+  `ifdef RANDOMIZE
+    `ifdef INIT_RANDOM
+      `INIT_RANDOM
+    `endif
+    `ifndef VERILATOR
+      `ifdef RANDOMIZE_DELAY
+        #`RANDOMIZE_DELAY begin end
+      `else
+        #0.002 begin end
+      `endif
+    `endif
+`ifdef RANDOMIZE_REG_INIT
+  _RAND_0 = {2{`RANDOM}};
+  swdata_1_r_re = _RAND_0[32:0];
+  _RAND_1 = {2{`RANDOM}};
+  swdata_1_r_im = _RAND_1[32:0];
+  _RAND_2 = {2{`RANDOM}};
+  swdata_1_r_1_re = _RAND_2[32:0];
+  _RAND_3 = {2{`RANDOM}};
+  swdata_1_r_1_im = _RAND_3[32:0];
+  _RAND_4 = {2{`RANDOM}};
+  io_out_0_r_re = _RAND_4[32:0];
+  _RAND_5 = {2{`RANDOM}};
+  io_out_0_r_im = _RAND_5[32:0];
+  _RAND_6 = {2{`RANDOM}};
+  io_out_0_r_1_re = _RAND_6[32:0];
+  _RAND_7 = {2{`RANDOM}};
+  io_out_0_r_1_im = _RAND_7[32:0];
+`endif // RANDOMIZE_REG_INIT
+  `endif // RANDOMIZE
+end // initial
+`ifdef FIRRTL_AFTER_INITIAL
+`FIRRTL_AFTER_INITIAL
+`endif
+`endif // SYNTHESIS
+endmodule
+module Switch_6(
   input         clock,
   input  [32:0] io_in_0_re,
   input  [32:0] io_in_0_im,
@@ -1169,10 +1692,18 @@ module FFT(
   input  [31:0] io_dIn_0_im,
   input  [31:0] io_dIn_1_re,
   input  [31:0] io_dIn_1_im,
+  input  [31:0] io_dIn_2_re,
+  input  [31:0] io_dIn_2_im,
+  input  [31:0] io_dIn_3_re,
+  input  [31:0] io_dIn_3_im,
   output [31:0] io_dOut_0_re,
   output [31:0] io_dOut_0_im,
   output [31:0] io_dOut_1_re,
   output [31:0] io_dOut_1_im,
+  output [31:0] io_dOut_2_re,
+  output [31:0] io_dOut_2_im,
+  output [31:0] io_dOut_3_re,
+  output [31:0] io_dOut_3_im,
   input         io_din_valid,
   output        io_dout_valid,
   output        io_busy
@@ -1180,10 +1711,23 @@ module FFT(
 `ifdef RANDOMIZE_REG_INIT
   reg [31:0] _RAND_0;
   reg [31:0] _RAND_1;
-  reg [31:0] _RAND_2;
-  reg [31:0] _RAND_3;
-  reg [31:0] _RAND_4;
-  reg [31:0] _RAND_5;
+  reg [63:0] _RAND_2;
+  reg [63:0] _RAND_3;
+  reg [63:0] _RAND_4;
+  reg [63:0] _RAND_5;
+  reg [63:0] _RAND_6;
+  reg [63:0] _RAND_7;
+  reg [63:0] _RAND_8;
+  reg [63:0] _RAND_9;
+  reg [31:0] _RAND_10;
+  reg [31:0] _RAND_11;
+  reg [31:0] _RAND_12;
+  reg [31:0] _RAND_13;
+  reg [31:0] _RAND_14;
+  reg [31:0] _RAND_15;
+  reg [31:0] _RAND_16;
+  reg [31:0] _RAND_17;
+  reg [31:0] _RAND_18;
 `endif // RANDOMIZE_REG_INIT
   wire [32:0] inst_io_in_0_re; // @[Modules.scala 287:22]
   wire [32:0] inst_io_in_0_im; // @[Modules.scala 287:22]
@@ -1195,6 +1739,96 @@ module FFT(
   wire [32:0] inst_io_out_1_im; // @[Modules.scala 287:22]
   wire [32:0] inst_io_wn_0_re; // @[Modules.scala 287:22]
   wire [32:0] inst_io_wn_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_1_io_in_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_1_io_in_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_1_io_in_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_1_io_in_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_1_io_out_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_1_io_out_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_1_io_out_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_1_io_out_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_1_io_wn_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_1_io_wn_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_2_io_in_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_2_io_in_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_2_io_in_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_2_io_in_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_2_io_out_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_2_io_out_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_2_io_out_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_2_io_out_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_2_io_wn_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_2_io_wn_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_3_io_in_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_3_io_in_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_3_io_in_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_3_io_in_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_3_io_out_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_3_io_out_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_3_io_out_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_3_io_out_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_3_io_wn_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_3_io_wn_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_4_io_in_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_4_io_in_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_4_io_in_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_4_io_in_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_4_io_out_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_4_io_out_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_4_io_out_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_4_io_out_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_4_io_wn_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_4_io_wn_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_5_io_in_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_5_io_in_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_5_io_in_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_5_io_in_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_5_io_out_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_5_io_out_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_5_io_out_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_5_io_out_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_5_io_wn_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_5_io_wn_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_6_io_in_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_6_io_in_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_6_io_in_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_6_io_in_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_6_io_out_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_6_io_out_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_6_io_out_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_6_io_out_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_6_io_wn_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_6_io_wn_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_7_io_in_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_7_io_in_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_7_io_in_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_7_io_in_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_7_io_out_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_7_io_out_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_7_io_out_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_7_io_out_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_7_io_wn_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_7_io_wn_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_8_io_in_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_8_io_in_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_8_io_in_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_8_io_in_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_8_io_out_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_8_io_out_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_8_io_out_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_8_io_out_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_8_io_wn_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_8_io_wn_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_9_io_in_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_9_io_in_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_9_io_in_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_9_io_in_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_9_io_out_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_9_io_out_0_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_9_io_out_1_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_9_io_out_1_im; // @[Modules.scala 287:22]
+  wire [32:0] inst_9_io_wn_0_re; // @[Modules.scala 287:22]
+  wire [32:0] inst_9_io_wn_0_im; // @[Modules.scala 287:22]
   wire [32:0] dataotemp_inst_io_in_0_re; // @[Modules.scala 213:22]
   wire [32:0] dataotemp_inst_io_in_0_im; // @[Modules.scala 213:22]
   wire [32:0] dataotemp_inst_io_in_1_re; // @[Modules.scala 213:22]
@@ -1203,57 +1837,403 @@ module FFT(
   wire [32:0] dataotemp_inst_io_out_0_im; // @[Modules.scala 213:22]
   wire [32:0] dataotemp_inst_io_out_1_re; // @[Modules.scala 213:22]
   wire [32:0] dataotemp_inst_io_out_1_im; // @[Modules.scala 213:22]
-  wire  inst_1_clock; // @[Modules.scala 311:22]
-  wire [32:0] inst_1_io_in_0_re; // @[Modules.scala 311:22]
-  wire [32:0] inst_1_io_in_0_im; // @[Modules.scala 311:22]
-  wire [32:0] inst_1_io_in_1_re; // @[Modules.scala 311:22]
-  wire [32:0] inst_1_io_in_1_im; // @[Modules.scala 311:22]
-  wire [32:0] inst_1_io_out_0_re; // @[Modules.scala 311:22]
-  wire [32:0] inst_1_io_out_0_im; // @[Modules.scala 311:22]
-  wire [32:0] inst_1_io_out_1_re; // @[Modules.scala 311:22]
-  wire [32:0] inst_1_io_out_1_im; // @[Modules.scala 311:22]
-  wire  inst_1_io_sel; // @[Modules.scala 311:22]
-  wire [31:0] inst_2_io_in_re; // @[Modules.scala 40:22]
-  wire [31:0] inst_2_io_in_im; // @[Modules.scala 40:22]
-  wire [32:0] inst_2_io_out_re; // @[Modules.scala 40:22]
-  wire [32:0] inst_2_io_out_im; // @[Modules.scala 40:22]
-  wire [31:0] inst_3_io_in_re; // @[Modules.scala 40:22]
-  wire [31:0] inst_3_io_in_im; // @[Modules.scala 40:22]
-  wire [32:0] inst_3_io_out_re; // @[Modules.scala 40:22]
-  wire [32:0] inst_3_io_out_im; // @[Modules.scala 40:22]
-  wire [32:0] inst_4_io_in_re; // @[Modules.scala 56:22]
-  wire [32:0] inst_4_io_in_im; // @[Modules.scala 56:22]
-  wire [31:0] inst_4_io_out_re; // @[Modules.scala 56:22]
-  wire [31:0] inst_4_io_out_im; // @[Modules.scala 56:22]
-  wire [32:0] inst_5_io_in_re; // @[Modules.scala 56:22]
-  wire [32:0] inst_5_io_in_im; // @[Modules.scala 56:22]
-  wire [31:0] inst_5_io_out_re; // @[Modules.scala 56:22]
-  wire [31:0] inst_5_io_out_im; // @[Modules.scala 56:22]
-  reg [2:0] cnt_0; // @[FFT.scala 110:46]
-  wire  busy = cnt_0 != 3'h0; // @[FFT.scala 114:21]
-  wire [2:0] _cnt_0_T_2 = cnt_0 + 3'h1; // @[FFT.scala 116:87]
-  wire  wnCtrl = cnt_0[0]; // @[FFT.scala 131:23]
-  wire [1:0] _wnList_T = {{1'd0}, wnCtrl}; // @[FFT.scala 135:96]
+  wire [32:0] dataotemp_inst_1_io_in_0_re; // @[Modules.scala 213:22]
+  wire [32:0] dataotemp_inst_1_io_in_0_im; // @[Modules.scala 213:22]
+  wire [32:0] dataotemp_inst_1_io_in_1_re; // @[Modules.scala 213:22]
+  wire [32:0] dataotemp_inst_1_io_in_1_im; // @[Modules.scala 213:22]
+  wire [32:0] dataotemp_inst_1_io_out_0_re; // @[Modules.scala 213:22]
+  wire [32:0] dataotemp_inst_1_io_out_0_im; // @[Modules.scala 213:22]
+  wire [32:0] dataotemp_inst_1_io_out_1_re; // @[Modules.scala 213:22]
+  wire [32:0] dataotemp_inst_1_io_out_1_im; // @[Modules.scala 213:22]
+  wire [32:0] exdata_inst_io_in_0_0_re; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_in_0_0_im; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_in_0_1_re; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_in_0_1_im; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_in_1_0_re; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_in_1_0_im; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_in_1_1_re; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_in_1_1_im; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_out_0_0_re; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_out_0_0_im; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_out_0_1_re; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_out_0_1_im; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_out_1_0_re; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_out_1_0_im; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_out_1_1_re; // @[Modules.scala 331:22]
+  wire [32:0] exdata_inst_io_out_1_1_im; // @[Modules.scala 331:22]
+  wire  inst_10_clock; // @[Modules.scala 311:22]
+  wire [32:0] inst_10_io_in_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_10_io_in_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_10_io_in_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_10_io_in_1_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_10_io_out_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_10_io_out_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_10_io_out_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_10_io_out_1_im; // @[Modules.scala 311:22]
+  wire  inst_10_io_sel; // @[Modules.scala 311:22]
+  wire  inst_11_clock; // @[Modules.scala 311:22]
+  wire [32:0] inst_11_io_in_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_11_io_in_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_11_io_in_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_11_io_in_1_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_11_io_out_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_11_io_out_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_11_io_out_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_11_io_out_1_im; // @[Modules.scala 311:22]
+  wire  inst_11_io_sel; // @[Modules.scala 311:22]
+  wire  inst_12_clock; // @[Modules.scala 311:22]
+  wire [32:0] inst_12_io_in_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_12_io_in_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_12_io_in_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_12_io_in_1_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_12_io_out_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_12_io_out_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_12_io_out_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_12_io_out_1_im; // @[Modules.scala 311:22]
+  wire  inst_12_io_sel; // @[Modules.scala 311:22]
+  wire  inst_13_clock; // @[Modules.scala 311:22]
+  wire [32:0] inst_13_io_in_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_13_io_in_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_13_io_in_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_13_io_in_1_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_13_io_out_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_13_io_out_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_13_io_out_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_13_io_out_1_im; // @[Modules.scala 311:22]
+  wire  inst_13_io_sel; // @[Modules.scala 311:22]
+  wire  inst_14_clock; // @[Modules.scala 311:22]
+  wire [32:0] inst_14_io_in_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_14_io_in_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_14_io_in_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_14_io_in_1_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_14_io_out_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_14_io_out_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_14_io_out_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_14_io_out_1_im; // @[Modules.scala 311:22]
+  wire  inst_14_io_sel; // @[Modules.scala 311:22]
+  wire  inst_15_clock; // @[Modules.scala 311:22]
+  wire [32:0] inst_15_io_in_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_15_io_in_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_15_io_in_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_15_io_in_1_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_15_io_out_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_15_io_out_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_15_io_out_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_15_io_out_1_im; // @[Modules.scala 311:22]
+  wire  inst_15_io_sel; // @[Modules.scala 311:22]
+  wire  inst_16_clock; // @[Modules.scala 311:22]
+  wire [32:0] inst_16_io_in_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_16_io_in_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_16_io_in_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_16_io_in_1_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_16_io_out_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_16_io_out_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_16_io_out_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_16_io_out_1_im; // @[Modules.scala 311:22]
+  wire  inst_16_io_sel; // @[Modules.scala 311:22]
+  wire  inst_17_clock; // @[Modules.scala 311:22]
+  wire [32:0] inst_17_io_in_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_17_io_in_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_17_io_in_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_17_io_in_1_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_17_io_out_0_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_17_io_out_0_im; // @[Modules.scala 311:22]
+  wire [32:0] inst_17_io_out_1_re; // @[Modules.scala 311:22]
+  wire [32:0] inst_17_io_out_1_im; // @[Modules.scala 311:22]
+  wire  inst_17_io_sel; // @[Modules.scala 311:22]
+  wire [31:0] inst_18_io_in_re; // @[Modules.scala 40:22]
+  wire [31:0] inst_18_io_in_im; // @[Modules.scala 40:22]
+  wire [32:0] inst_18_io_out_re; // @[Modules.scala 40:22]
+  wire [32:0] inst_18_io_out_im; // @[Modules.scala 40:22]
+  wire [31:0] inst_19_io_in_re; // @[Modules.scala 40:22]
+  wire [31:0] inst_19_io_in_im; // @[Modules.scala 40:22]
+  wire [32:0] inst_19_io_out_re; // @[Modules.scala 40:22]
+  wire [32:0] inst_19_io_out_im; // @[Modules.scala 40:22]
+  wire [31:0] inst_20_io_in_re; // @[Modules.scala 40:22]
+  wire [31:0] inst_20_io_in_im; // @[Modules.scala 40:22]
+  wire [32:0] inst_20_io_out_re; // @[Modules.scala 40:22]
+  wire [32:0] inst_20_io_out_im; // @[Modules.scala 40:22]
+  wire [31:0] inst_21_io_in_re; // @[Modules.scala 40:22]
+  wire [31:0] inst_21_io_in_im; // @[Modules.scala 40:22]
+  wire [32:0] inst_21_io_out_re; // @[Modules.scala 40:22]
+  wire [32:0] inst_21_io_out_im; // @[Modules.scala 40:22]
+  wire [32:0] inst_22_io_in_re; // @[Modules.scala 56:22]
+  wire [32:0] inst_22_io_in_im; // @[Modules.scala 56:22]
+  wire [31:0] inst_22_io_out_re; // @[Modules.scala 56:22]
+  wire [31:0] inst_22_io_out_im; // @[Modules.scala 56:22]
+  wire [32:0] inst_23_io_in_re; // @[Modules.scala 56:22]
+  wire [32:0] inst_23_io_in_im; // @[Modules.scala 56:22]
+  wire [31:0] inst_23_io_out_re; // @[Modules.scala 56:22]
+  wire [31:0] inst_23_io_out_im; // @[Modules.scala 56:22]
+  wire [32:0] inst_24_io_in_re; // @[Modules.scala 56:22]
+  wire [32:0] inst_24_io_in_im; // @[Modules.scala 56:22]
+  wire [31:0] inst_24_io_out_re; // @[Modules.scala 56:22]
+  wire [31:0] inst_24_io_out_im; // @[Modules.scala 56:22]
+  wire [32:0] inst_25_io_in_re; // @[Modules.scala 56:22]
+  wire [32:0] inst_25_io_in_im; // @[Modules.scala 56:22]
+  wire [31:0] inst_25_io_out_re; // @[Modules.scala 56:22]
+  wire [31:0] inst_25_io_out_im; // @[Modules.scala 56:22]
+  reg [5:0] cnt_0; // @[FFT.scala 110:46]
+  reg [5:0] cnt_1; // @[FFT.scala 110:46]
+  wire  busy = cnt_0 != 6'h0; // @[FFT.scala 114:21]
+  wire [5:0] _cnt_0_T_2 = cnt_0 + 6'h1; // @[FFT.scala 116:87]
+  wire [6:0] _wnList_T = {{1'd0}, cnt_0}; // @[FFT.scala 135:96]
   wire [9:0] wnList_res_re_rawIn__sExp = {1'b0,$signed(9'h100)}; // @[rawFloatFromFN.scala 70:48]
   wire [32:0] _wnList_res_re_T_7 = {1'h0,wnList_res_re_rawIn__sExp[8:6],wnList_res_re_rawIn__sExp[5:0],23'h0}; // @[Cat.scala 33:92]
-  wire [9:0] wnList_res_re_rawIn_1_sExp = {1'b0,$signed(9'hca)}; // @[rawFloatFromFN.scala 70:48]
-  wire [32:0] _wnList_res_re_T_15 = {1'h0,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'hd3132}; // @[Cat.scala 33:92]
+  wire [9:0] wnList_res_re_rawIn_1_sExp = {1'b0,$signed(9'hff)}; // @[rawFloatFromFN.scala 70:48]
+  wire [32:0] _wnList_res_re_T_15 = {1'h0,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h7ec46d}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_23 = {1'h0,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h7b14be}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_31 = {1'h0,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h74fa0b}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_39 = {1'h0,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h6c835e}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_47 = {1'h0,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h61c598}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_55 = {1'h0,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h54db31}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_63 = {1'h0,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h45e403}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_71 = {1'h0,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h3504f3}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_79 = {1'h0,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h226799}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_87 = {1'h0,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'he39da}; // @[Cat.scala 33:92]
+  wire [9:0] wnList_res_re_rawIn_11_sExp = {1'b0,$signed(9'hfe)}; // @[rawFloatFromFN.scala 70:48]
+  wire [32:0] _wnList_res_re_T_95 = {1'h0,wnList_res_re_rawIn_11_sExp[8:6],wnList_res_re_rawIn_11_sExp[5:0],23'h715aea}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_103 = {1'h0,wnList_res_re_rawIn_11_sExp[8:6],wnList_res_re_rawIn_11_sExp[5:0],23'h43ef15}
+    ; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_111 = {1'h0,wnList_res_re_rawIn_11_sExp[8:6],wnList_res_re_rawIn_11_sExp[5:0],23'h14a031}
+    ; // @[Cat.scala 33:92]
+  wire [9:0] wnList_res_re_rawIn_14_sExp = {1'b0,$signed(9'hfd)}; // @[rawFloatFromFN.scala 70:48]
+  wire [32:0] _wnList_res_re_T_119 = {1'h0,wnList_res_re_rawIn_14_sExp[8:6],wnList_res_re_rawIn_14_sExp[5:0],23'h47c5c2}
+    ; // @[Cat.scala 33:92]
+  wire [9:0] wnList_res_re_rawIn_15_sExp = {1'b0,$signed(9'hfc)}; // @[rawFloatFromFN.scala 70:48]
+  wire [32:0] _wnList_res_re_T_127 = {1'h0,wnList_res_re_rawIn_15_sExp[8:6],wnList_res_re_rawIn_15_sExp[5:0],23'h48bd36}
+    ; // @[Cat.scala 33:92]
+  wire [9:0] wnList_res_re_rawIn_16_sExp = {1'b0,$signed(9'hca)}; // @[rawFloatFromFN.scala 70:48]
+  wire [32:0] _wnList_res_re_T_135 = {1'h0,wnList_res_re_rawIn_16_sExp[8:6],wnList_res_re_rawIn_16_sExp[5:0],23'hd3132}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_143 = {1'h1,wnList_res_re_rawIn_15_sExp[8:6],wnList_res_re_rawIn_15_sExp[5:0],23'h48bd36}
+    ; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_151 = {1'h1,wnList_res_re_rawIn_14_sExp[8:6],wnList_res_re_rawIn_14_sExp[5:0],23'h47c5c2}
+    ; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_159 = {1'h1,wnList_res_re_rawIn_11_sExp[8:6],wnList_res_re_rawIn_11_sExp[5:0],23'h14a031}
+    ; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_167 = {1'h1,wnList_res_re_rawIn_11_sExp[8:6],wnList_res_re_rawIn_11_sExp[5:0],23'h43ef15}
+    ; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_175 = {1'h1,wnList_res_re_rawIn_11_sExp[8:6],wnList_res_re_rawIn_11_sExp[5:0],23'h715aea}
+    ; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_183 = {1'h1,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'he39da}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_191 = {1'h1,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h226799}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_199 = {1'h1,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h3504f3}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_207 = {1'h1,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h45e403}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_215 = {1'h1,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h54db31}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_223 = {1'h1,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h61c598}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_231 = {1'h1,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h6c835e}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_239 = {1'h1,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h74fa0b}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_247 = {1'h1,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h7b14be}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_re_T_255 = {1'h1,wnList_res_re_rawIn_1_sExp[8:6],wnList_res_re_rawIn_1_sExp[5:0],23'h7ec46d}; // @[Cat.scala 33:92]
+  wire [32:0] _GEN_2 = 5'h1 == _wnList_T[4:0] ? _wnList_res_re_T_15 : _wnList_res_re_T_7; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_3 = 5'h2 == _wnList_T[4:0] ? _wnList_res_re_T_23 : _GEN_2; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_4 = 5'h3 == _wnList_T[4:0] ? _wnList_res_re_T_31 : _GEN_3; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_5 = 5'h4 == _wnList_T[4:0] ? _wnList_res_re_T_39 : _GEN_4; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_6 = 5'h5 == _wnList_T[4:0] ? _wnList_res_re_T_47 : _GEN_5; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_7 = 5'h6 == _wnList_T[4:0] ? _wnList_res_re_T_55 : _GEN_6; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_8 = 5'h7 == _wnList_T[4:0] ? _wnList_res_re_T_63 : _GEN_7; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_9 = 5'h8 == _wnList_T[4:0] ? _wnList_res_re_T_71 : _GEN_8; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_10 = 5'h9 == _wnList_T[4:0] ? _wnList_res_re_T_79 : _GEN_9; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_11 = 5'ha == _wnList_T[4:0] ? _wnList_res_re_T_87 : _GEN_10; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_12 = 5'hb == _wnList_T[4:0] ? _wnList_res_re_T_95 : _GEN_11; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_13 = 5'hc == _wnList_T[4:0] ? _wnList_res_re_T_103 : _GEN_12; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_14 = 5'hd == _wnList_T[4:0] ? _wnList_res_re_T_111 : _GEN_13; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_15 = 5'he == _wnList_T[4:0] ? _wnList_res_re_T_119 : _GEN_14; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_16 = 5'hf == _wnList_T[4:0] ? _wnList_res_re_T_127 : _GEN_15; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_17 = 5'h10 == _wnList_T[4:0] ? _wnList_res_re_T_135 : _GEN_16; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_18 = 5'h11 == _wnList_T[4:0] ? _wnList_res_re_T_143 : _GEN_17; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_19 = 5'h12 == _wnList_T[4:0] ? _wnList_res_re_T_151 : _GEN_18; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_20 = 5'h13 == _wnList_T[4:0] ? _wnList_res_re_T_159 : _GEN_19; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_21 = 5'h14 == _wnList_T[4:0] ? _wnList_res_re_T_167 : _GEN_20; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_22 = 5'h15 == _wnList_T[4:0] ? _wnList_res_re_T_175 : _GEN_21; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_23 = 5'h16 == _wnList_T[4:0] ? _wnList_res_re_T_183 : _GEN_22; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_24 = 5'h17 == _wnList_T[4:0] ? _wnList_res_re_T_191 : _GEN_23; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_25 = 5'h18 == _wnList_T[4:0] ? _wnList_res_re_T_199 : _GEN_24; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_26 = 5'h19 == _wnList_T[4:0] ? _wnList_res_re_T_207 : _GEN_25; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_27 = 5'h1a == _wnList_T[4:0] ? _wnList_res_re_T_215 : _GEN_26; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_28 = 5'h1b == _wnList_T[4:0] ? _wnList_res_re_T_223 : _GEN_27; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_29 = 5'h1c == _wnList_T[4:0] ? _wnList_res_re_T_231 : _GEN_28; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_30 = 5'h1d == _wnList_T[4:0] ? _wnList_res_re_T_239 : _GEN_29; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_31 = 5'h1e == _wnList_T[4:0] ? _wnList_res_re_T_247 : _GEN_30; // @[FFT.scala 104:{12,12}]
   wire [9:0] wnList_res_im_rawIn__sExp = {1'b0,$signed(9'h6b)}; // @[rawFloatFromFN.scala 70:48]
   wire [32:0] _wnList_res_im_T_7 = {4'h8,wnList_res_im_rawIn__sExp[5:0],23'h0}; // @[Cat.scala 33:92]
-  wire [32:0] _wnList_res_im_T_15 = {1'h1,wnList_res_re_rawIn__sExp[8:6],wnList_res_re_rawIn__sExp[5:0],23'h0}; // @[Cat.scala 33:92]
+  wire [32:0] _wnList_res_im_T_135 = {1'h1,wnList_res_re_rawIn__sExp[8:6],wnList_res_re_rawIn__sExp[5:0],23'h0}; // @[Cat.scala 33:92]
+  wire [32:0] _GEN_34 = 5'h1 == _wnList_T[4:0] ? _wnList_res_re_T_143 : _wnList_res_im_T_7; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_35 = 5'h2 == _wnList_T[4:0] ? _wnList_res_re_T_151 : _GEN_34; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_36 = 5'h3 == _wnList_T[4:0] ? _wnList_res_re_T_159 : _GEN_35; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_37 = 5'h4 == _wnList_T[4:0] ? _wnList_res_re_T_167 : _GEN_36; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_38 = 5'h5 == _wnList_T[4:0] ? _wnList_res_re_T_175 : _GEN_37; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_39 = 5'h6 == _wnList_T[4:0] ? _wnList_res_re_T_183 : _GEN_38; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_40 = 5'h7 == _wnList_T[4:0] ? _wnList_res_re_T_191 : _GEN_39; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_41 = 5'h8 == _wnList_T[4:0] ? _wnList_res_re_T_199 : _GEN_40; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_42 = 5'h9 == _wnList_T[4:0] ? _wnList_res_re_T_207 : _GEN_41; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_43 = 5'ha == _wnList_T[4:0] ? _wnList_res_re_T_215 : _GEN_42; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_44 = 5'hb == _wnList_T[4:0] ? _wnList_res_re_T_223 : _GEN_43; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_45 = 5'hc == _wnList_T[4:0] ? _wnList_res_re_T_231 : _GEN_44; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_46 = 5'hd == _wnList_T[4:0] ? _wnList_res_re_T_239 : _GEN_45; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_47 = 5'he == _wnList_T[4:0] ? _wnList_res_re_T_247 : _GEN_46; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_48 = 5'hf == _wnList_T[4:0] ? _wnList_res_re_T_255 : _GEN_47; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_49 = 5'h10 == _wnList_T[4:0] ? _wnList_res_im_T_135 : _GEN_48; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_50 = 5'h11 == _wnList_T[4:0] ? _wnList_res_re_T_255 : _GEN_49; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_51 = 5'h12 == _wnList_T[4:0] ? _wnList_res_re_T_247 : _GEN_50; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_52 = 5'h13 == _wnList_T[4:0] ? _wnList_res_re_T_239 : _GEN_51; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_53 = 5'h14 == _wnList_T[4:0] ? _wnList_res_re_T_231 : _GEN_52; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_54 = 5'h15 == _wnList_T[4:0] ? _wnList_res_re_T_223 : _GEN_53; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_55 = 5'h16 == _wnList_T[4:0] ? _wnList_res_re_T_215 : _GEN_54; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_56 = 5'h17 == _wnList_T[4:0] ? _wnList_res_re_T_207 : _GEN_55; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_57 = 5'h18 == _wnList_T[4:0] ? _wnList_res_re_T_199 : _GEN_56; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_58 = 5'h19 == _wnList_T[4:0] ? _wnList_res_re_T_191 : _GEN_57; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_59 = 5'h1a == _wnList_T[4:0] ? _wnList_res_re_T_183 : _GEN_58; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_60 = 5'h1b == _wnList_T[4:0] ? _wnList_res_re_T_175 : _GEN_59; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_61 = 5'h1c == _wnList_T[4:0] ? _wnList_res_re_T_167 : _GEN_60; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_62 = 5'h1d == _wnList_T[4:0] ? _wnList_res_re_T_159 : _GEN_61; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_63 = 5'h1e == _wnList_T[4:0] ? _wnList_res_re_T_151 : _GEN_62; // @[FFT.scala 105:{12,12}]
+  wire [5:0] _wnList_T_3 = 6'h10 + cnt_0; // @[FFT.scala 135:96]
+  wire [32:0] _GEN_66 = 5'h1 == _wnList_T_3[4:0] ? _wnList_res_re_T_15 : _wnList_res_re_T_7; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_67 = 5'h2 == _wnList_T_3[4:0] ? _wnList_res_re_T_23 : _GEN_66; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_68 = 5'h3 == _wnList_T_3[4:0] ? _wnList_res_re_T_31 : _GEN_67; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_69 = 5'h4 == _wnList_T_3[4:0] ? _wnList_res_re_T_39 : _GEN_68; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_70 = 5'h5 == _wnList_T_3[4:0] ? _wnList_res_re_T_47 : _GEN_69; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_71 = 5'h6 == _wnList_T_3[4:0] ? _wnList_res_re_T_55 : _GEN_70; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_72 = 5'h7 == _wnList_T_3[4:0] ? _wnList_res_re_T_63 : _GEN_71; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_73 = 5'h8 == _wnList_T_3[4:0] ? _wnList_res_re_T_71 : _GEN_72; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_74 = 5'h9 == _wnList_T_3[4:0] ? _wnList_res_re_T_79 : _GEN_73; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_75 = 5'ha == _wnList_T_3[4:0] ? _wnList_res_re_T_87 : _GEN_74; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_76 = 5'hb == _wnList_T_3[4:0] ? _wnList_res_re_T_95 : _GEN_75; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_77 = 5'hc == _wnList_T_3[4:0] ? _wnList_res_re_T_103 : _GEN_76; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_78 = 5'hd == _wnList_T_3[4:0] ? _wnList_res_re_T_111 : _GEN_77; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_79 = 5'he == _wnList_T_3[4:0] ? _wnList_res_re_T_119 : _GEN_78; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_80 = 5'hf == _wnList_T_3[4:0] ? _wnList_res_re_T_127 : _GEN_79; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_81 = 5'h10 == _wnList_T_3[4:0] ? _wnList_res_re_T_135 : _GEN_80; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_82 = 5'h11 == _wnList_T_3[4:0] ? _wnList_res_re_T_143 : _GEN_81; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_83 = 5'h12 == _wnList_T_3[4:0] ? _wnList_res_re_T_151 : _GEN_82; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_84 = 5'h13 == _wnList_T_3[4:0] ? _wnList_res_re_T_159 : _GEN_83; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_85 = 5'h14 == _wnList_T_3[4:0] ? _wnList_res_re_T_167 : _GEN_84; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_86 = 5'h15 == _wnList_T_3[4:0] ? _wnList_res_re_T_175 : _GEN_85; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_87 = 5'h16 == _wnList_T_3[4:0] ? _wnList_res_re_T_183 : _GEN_86; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_88 = 5'h17 == _wnList_T_3[4:0] ? _wnList_res_re_T_191 : _GEN_87; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_89 = 5'h18 == _wnList_T_3[4:0] ? _wnList_res_re_T_199 : _GEN_88; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_90 = 5'h19 == _wnList_T_3[4:0] ? _wnList_res_re_T_207 : _GEN_89; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_91 = 5'h1a == _wnList_T_3[4:0] ? _wnList_res_re_T_215 : _GEN_90; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_92 = 5'h1b == _wnList_T_3[4:0] ? _wnList_res_re_T_223 : _GEN_91; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_93 = 5'h1c == _wnList_T_3[4:0] ? _wnList_res_re_T_231 : _GEN_92; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_94 = 5'h1d == _wnList_T_3[4:0] ? _wnList_res_re_T_239 : _GEN_93; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_95 = 5'h1e == _wnList_T_3[4:0] ? _wnList_res_re_T_247 : _GEN_94; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_98 = 5'h1 == _wnList_T_3[4:0] ? _wnList_res_re_T_143 : _wnList_res_im_T_7; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_99 = 5'h2 == _wnList_T_3[4:0] ? _wnList_res_re_T_151 : _GEN_98; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_100 = 5'h3 == _wnList_T_3[4:0] ? _wnList_res_re_T_159 : _GEN_99; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_101 = 5'h4 == _wnList_T_3[4:0] ? _wnList_res_re_T_167 : _GEN_100; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_102 = 5'h5 == _wnList_T_3[4:0] ? _wnList_res_re_T_175 : _GEN_101; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_103 = 5'h6 == _wnList_T_3[4:0] ? _wnList_res_re_T_183 : _GEN_102; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_104 = 5'h7 == _wnList_T_3[4:0] ? _wnList_res_re_T_191 : _GEN_103; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_105 = 5'h8 == _wnList_T_3[4:0] ? _wnList_res_re_T_199 : _GEN_104; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_106 = 5'h9 == _wnList_T_3[4:0] ? _wnList_res_re_T_207 : _GEN_105; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_107 = 5'ha == _wnList_T_3[4:0] ? _wnList_res_re_T_215 : _GEN_106; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_108 = 5'hb == _wnList_T_3[4:0] ? _wnList_res_re_T_223 : _GEN_107; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_109 = 5'hc == _wnList_T_3[4:0] ? _wnList_res_re_T_231 : _GEN_108; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_110 = 5'hd == _wnList_T_3[4:0] ? _wnList_res_re_T_239 : _GEN_109; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_111 = 5'he == _wnList_T_3[4:0] ? _wnList_res_re_T_247 : _GEN_110; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_112 = 5'hf == _wnList_T_3[4:0] ? _wnList_res_re_T_255 : _GEN_111; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_113 = 5'h10 == _wnList_T_3[4:0] ? _wnList_res_im_T_135 : _GEN_112; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_114 = 5'h11 == _wnList_T_3[4:0] ? _wnList_res_re_T_255 : _GEN_113; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_115 = 5'h12 == _wnList_T_3[4:0] ? _wnList_res_re_T_247 : _GEN_114; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_116 = 5'h13 == _wnList_T_3[4:0] ? _wnList_res_re_T_239 : _GEN_115; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_117 = 5'h14 == _wnList_T_3[4:0] ? _wnList_res_re_T_231 : _GEN_116; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_118 = 5'h15 == _wnList_T_3[4:0] ? _wnList_res_re_T_223 : _GEN_117; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_119 = 5'h16 == _wnList_T_3[4:0] ? _wnList_res_re_T_215 : _GEN_118; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_120 = 5'h17 == _wnList_T_3[4:0] ? _wnList_res_re_T_207 : _GEN_119; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_121 = 5'h18 == _wnList_T_3[4:0] ? _wnList_res_re_T_199 : _GEN_120; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_122 = 5'h19 == _wnList_T_3[4:0] ? _wnList_res_re_T_191 : _GEN_121; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_123 = 5'h1a == _wnList_T_3[4:0] ? _wnList_res_re_T_183 : _GEN_122; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_124 = 5'h1b == _wnList_T_3[4:0] ? _wnList_res_re_T_175 : _GEN_123; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_125 = 5'h1c == _wnList_T_3[4:0] ? _wnList_res_re_T_167 : _GEN_124; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_126 = 5'h1d == _wnList_T_3[4:0] ? _wnList_res_re_T_159 : _GEN_125; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_127 = 5'h1e == _wnList_T_3[4:0] ? _wnList_res_re_T_151 : _GEN_126; // @[FFT.scala 105:{12,12}]
+  wire [3:0] wnCtrl = cnt_1[3:0]; // @[FFT.scala 131:23]
+  wire [4:0] _wnList_T_4 = {{1'd0}, wnCtrl}; // @[FFT.scala 135:96]
+  wire [32:0] _GEN_130 = 4'h1 == _wnList_T_4[3:0] ? _wnList_res_re_T_23 : _wnList_res_re_T_7; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_131 = 4'h2 == _wnList_T_4[3:0] ? _wnList_res_re_T_39 : _GEN_130; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_132 = 4'h3 == _wnList_T_4[3:0] ? _wnList_res_re_T_55 : _GEN_131; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_133 = 4'h4 == _wnList_T_4[3:0] ? _wnList_res_re_T_71 : _GEN_132; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_134 = 4'h5 == _wnList_T_4[3:0] ? _wnList_res_re_T_87 : _GEN_133; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_135 = 4'h6 == _wnList_T_4[3:0] ? _wnList_res_re_T_103 : _GEN_134; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_136 = 4'h7 == _wnList_T_4[3:0] ? _wnList_res_re_T_119 : _GEN_135; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_137 = 4'h8 == _wnList_T_4[3:0] ? _wnList_res_re_T_135 : _GEN_136; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_138 = 4'h9 == _wnList_T_4[3:0] ? _wnList_res_re_T_151 : _GEN_137; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_139 = 4'ha == _wnList_T_4[3:0] ? _wnList_res_re_T_167 : _GEN_138; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_140 = 4'hb == _wnList_T_4[3:0] ? _wnList_res_re_T_183 : _GEN_139; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_141 = 4'hc == _wnList_T_4[3:0] ? _wnList_res_re_T_199 : _GEN_140; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_142 = 4'hd == _wnList_T_4[3:0] ? _wnList_res_re_T_215 : _GEN_141; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_143 = 4'he == _wnList_T_4[3:0] ? _wnList_res_re_T_231 : _GEN_142; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_146 = 4'h1 == _wnList_T_4[3:0] ? _wnList_res_re_T_151 : _wnList_res_im_T_7; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_147 = 4'h2 == _wnList_T_4[3:0] ? _wnList_res_re_T_167 : _GEN_146; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_148 = 4'h3 == _wnList_T_4[3:0] ? _wnList_res_re_T_183 : _GEN_147; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_149 = 4'h4 == _wnList_T_4[3:0] ? _wnList_res_re_T_199 : _GEN_148; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_150 = 4'h5 == _wnList_T_4[3:0] ? _wnList_res_re_T_215 : _GEN_149; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_151 = 4'h6 == _wnList_T_4[3:0] ? _wnList_res_re_T_231 : _GEN_150; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_152 = 4'h7 == _wnList_T_4[3:0] ? _wnList_res_re_T_247 : _GEN_151; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_153 = 4'h8 == _wnList_T_4[3:0] ? _wnList_res_im_T_135 : _GEN_152; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_154 = 4'h9 == _wnList_T_4[3:0] ? _wnList_res_re_T_247 : _GEN_153; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_155 = 4'ha == _wnList_T_4[3:0] ? _wnList_res_re_T_231 : _GEN_154; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_156 = 4'hb == _wnList_T_4[3:0] ? _wnList_res_re_T_215 : _GEN_155; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_157 = 4'hc == _wnList_T_4[3:0] ? _wnList_res_re_T_199 : _GEN_156; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_158 = 4'hd == _wnList_T_4[3:0] ? _wnList_res_re_T_183 : _GEN_157; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_159 = 4'he == _wnList_T_4[3:0] ? _wnList_res_re_T_167 : _GEN_158; // @[FFT.scala 105:{12,12}]
+  wire [2:0] wnCtrl_1 = cnt_1[2:0]; // @[FFT.scala 131:23]
+  wire [3:0] _wnList_T_8 = {{1'd0}, wnCtrl_1}; // @[FFT.scala 135:96]
+  wire [32:0] _GEN_194 = 3'h1 == _wnList_T_8[2:0] ? _wnList_res_re_T_39 : _wnList_res_re_T_7; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_195 = 3'h2 == _wnList_T_8[2:0] ? _wnList_res_re_T_71 : _GEN_194; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_196 = 3'h3 == _wnList_T_8[2:0] ? _wnList_res_re_T_103 : _GEN_195; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_197 = 3'h4 == _wnList_T_8[2:0] ? _wnList_res_re_T_135 : _GEN_196; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_198 = 3'h5 == _wnList_T_8[2:0] ? _wnList_res_re_T_167 : _GEN_197; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_199 = 3'h6 == _wnList_T_8[2:0] ? _wnList_res_re_T_199 : _GEN_198; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_202 = 3'h1 == _wnList_T_8[2:0] ? _wnList_res_re_T_167 : _wnList_res_im_T_7; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_203 = 3'h2 == _wnList_T_8[2:0] ? _wnList_res_re_T_199 : _GEN_202; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_204 = 3'h3 == _wnList_T_8[2:0] ? _wnList_res_re_T_231 : _GEN_203; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_205 = 3'h4 == _wnList_T_8[2:0] ? _wnList_res_im_T_135 : _GEN_204; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_206 = 3'h5 == _wnList_T_8[2:0] ? _wnList_res_re_T_231 : _GEN_205; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_207 = 3'h6 == _wnList_T_8[2:0] ? _wnList_res_re_T_199 : _GEN_206; // @[FFT.scala 105:{12,12}]
+  wire [1:0] wnCtrl_2 = cnt_1[1:0]; // @[FFT.scala 131:23]
+  wire [2:0] _wnList_T_12 = {{1'd0}, wnCtrl_2}; // @[FFT.scala 135:96]
+  wire [32:0] _GEN_226 = 2'h1 == _wnList_T_12[1:0] ? _wnList_res_re_T_71 : _wnList_res_re_T_7; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_227 = 2'h2 == _wnList_T_12[1:0] ? _wnList_res_re_T_135 : _GEN_226; // @[FFT.scala 104:{12,12}]
+  wire [32:0] _GEN_230 = 2'h1 == _wnList_T_12[1:0] ? _wnList_res_re_T_199 : _wnList_res_im_T_7; // @[FFT.scala 105:{12,12}]
+  wire [32:0] _GEN_231 = 2'h2 == _wnList_T_12[1:0] ? _wnList_res_im_T_135 : _GEN_230; // @[FFT.scala 105:{12,12}]
+  wire  wnCtrl_3 = cnt_1[0]; // @[FFT.scala 131:23]
+  wire [1:0] _wnList_T_16 = {{1'd0}, wnCtrl_3}; // @[FFT.scala 135:96]
+  reg [32:0] REG__0_re; // @[FFT.scala 157:67]
+  reg [32:0] REG__0_im; // @[FFT.scala 157:67]
+  reg [32:0] REG__1_re; // @[FFT.scala 157:67]
+  reg [32:0] REG__1_im; // @[FFT.scala 157:67]
+  reg [32:0] REG_1_0_re; // @[FFT.scala 157:67]
+  reg [32:0] REG_1_0_im; // @[FFT.scala 157:67]
+  reg [32:0] REG_1_1_re; // @[FFT.scala 157:67]
+  reg [32:0] REG_1_1_im; // @[FFT.scala 157:67]
   wire [63:0] _T_1 = {io_dIn_0_re,io_dIn_0_im}; // @[FFT.scala 170:91]
   wire [63:0] _T_4 = {io_dIn_1_re,io_dIn_1_im}; // @[FFT.scala 170:91]
-  reg [2:0] io_dout_valid_REG; // @[FFT.scala 179:27]
+  wire [63:0] _T_7 = {io_dIn_2_re,io_dIn_2_im}; // @[FFT.scala 170:91]
+  wire [63:0] _T_10 = {io_dIn_3_re,io_dIn_3_im}; // @[FFT.scala 170:91]
+  reg [5:0] io_dout_valid_REG; // @[FFT.scala 179:27]
   wire [32:0] datao_0_re = dataotemp_inst_io_out_0_re; // @[FFT.scala 124:22 141:9]
   wire [32:0] datao_0_im = dataotemp_inst_io_out_0_im; // @[FFT.scala 124:22 141:9]
-  wire [65:0] _T_7 = {datao_0_re,datao_0_im}; // @[FFT.scala 181:96]
-  reg [31:0] REG_re; // @[FFT.scala 181:64]
-  reg [31:0] REG_im; // @[FFT.scala 181:64]
+  wire [65:0] _T_13 = {datao_0_re,datao_0_im}; // @[FFT.scala 181:96]
+  reg [31:0] REG_2_re; // @[FFT.scala 181:64]
+  reg [31:0] REG_2_im; // @[FFT.scala 181:64]
   wire [32:0] datao_1_re = dataotemp_inst_io_out_1_re; // @[FFT.scala 124:22 141:9]
   wire [32:0] datao_1_im = dataotemp_inst_io_out_1_im; // @[FFT.scala 124:22 141:9]
-  wire [65:0] _T_10 = {datao_1_re,datao_1_im}; // @[FFT.scala 181:96]
-  reg [31:0] REG_1_re; // @[FFT.scala 181:64]
-  reg [31:0] REG_1_im; // @[FFT.scala 181:64]
+  wire [65:0] _T_16 = {datao_1_re,datao_1_im}; // @[FFT.scala 181:96]
+  reg [31:0] REG_3_re; // @[FFT.scala 181:64]
+  reg [31:0] REG_3_im; // @[FFT.scala 181:64]
+  wire [32:0] datao_2_re = dataotemp_inst_1_io_out_0_re; // @[FFT.scala 124:22 141:9]
+  wire [32:0] datao_2_im = dataotemp_inst_1_io_out_0_im; // @[FFT.scala 124:22 141:9]
+  wire [65:0] _T_19 = {datao_2_re,datao_2_im}; // @[FFT.scala 181:96]
+  reg [31:0] REG_4_re; // @[FFT.scala 181:64]
+  reg [31:0] REG_4_im; // @[FFT.scala 181:64]
+  wire [32:0] datao_3_re = dataotemp_inst_1_io_out_1_re; // @[FFT.scala 124:22 141:9]
+  wire [32:0] datao_3_im = dataotemp_inst_1_io_out_1_im; // @[FFT.scala 124:22 141:9]
+  wire [65:0] _T_22 = {datao_3_re,datao_3_im}; // @[FFT.scala 181:96]
+  reg [31:0] REG_5_re; // @[FFT.scala 181:64]
+  reg [31:0] REG_5_im; // @[FFT.scala 181:64]
   ButterflyMul inst ( // @[Modules.scala 287:22]
     .io_in_0_re(inst_io_in_0_re),
     .io_in_0_im(inst_io_in_0_im),
@@ -1266,6 +2246,114 @@ module FFT(
     .io_wn_0_re(inst_io_wn_0_re),
     .io_wn_0_im(inst_io_wn_0_im)
   );
+  ButterflyMul inst_1 ( // @[Modules.scala 287:22]
+    .io_in_0_re(inst_1_io_in_0_re),
+    .io_in_0_im(inst_1_io_in_0_im),
+    .io_in_1_re(inst_1_io_in_1_re),
+    .io_in_1_im(inst_1_io_in_1_im),
+    .io_out_0_re(inst_1_io_out_0_re),
+    .io_out_0_im(inst_1_io_out_0_im),
+    .io_out_1_re(inst_1_io_out_1_re),
+    .io_out_1_im(inst_1_io_out_1_im),
+    .io_wn_0_re(inst_1_io_wn_0_re),
+    .io_wn_0_im(inst_1_io_wn_0_im)
+  );
+  ButterflyMul inst_2 ( // @[Modules.scala 287:22]
+    .io_in_0_re(inst_2_io_in_0_re),
+    .io_in_0_im(inst_2_io_in_0_im),
+    .io_in_1_re(inst_2_io_in_1_re),
+    .io_in_1_im(inst_2_io_in_1_im),
+    .io_out_0_re(inst_2_io_out_0_re),
+    .io_out_0_im(inst_2_io_out_0_im),
+    .io_out_1_re(inst_2_io_out_1_re),
+    .io_out_1_im(inst_2_io_out_1_im),
+    .io_wn_0_re(inst_2_io_wn_0_re),
+    .io_wn_0_im(inst_2_io_wn_0_im)
+  );
+  ButterflyMul inst_3 ( // @[Modules.scala 287:22]
+    .io_in_0_re(inst_3_io_in_0_re),
+    .io_in_0_im(inst_3_io_in_0_im),
+    .io_in_1_re(inst_3_io_in_1_re),
+    .io_in_1_im(inst_3_io_in_1_im),
+    .io_out_0_re(inst_3_io_out_0_re),
+    .io_out_0_im(inst_3_io_out_0_im),
+    .io_out_1_re(inst_3_io_out_1_re),
+    .io_out_1_im(inst_3_io_out_1_im),
+    .io_wn_0_re(inst_3_io_wn_0_re),
+    .io_wn_0_im(inst_3_io_wn_0_im)
+  );
+  ButterflyMul inst_4 ( // @[Modules.scala 287:22]
+    .io_in_0_re(inst_4_io_in_0_re),
+    .io_in_0_im(inst_4_io_in_0_im),
+    .io_in_1_re(inst_4_io_in_1_re),
+    .io_in_1_im(inst_4_io_in_1_im),
+    .io_out_0_re(inst_4_io_out_0_re),
+    .io_out_0_im(inst_4_io_out_0_im),
+    .io_out_1_re(inst_4_io_out_1_re),
+    .io_out_1_im(inst_4_io_out_1_im),
+    .io_wn_0_re(inst_4_io_wn_0_re),
+    .io_wn_0_im(inst_4_io_wn_0_im)
+  );
+  ButterflyMul inst_5 ( // @[Modules.scala 287:22]
+    .io_in_0_re(inst_5_io_in_0_re),
+    .io_in_0_im(inst_5_io_in_0_im),
+    .io_in_1_re(inst_5_io_in_1_re),
+    .io_in_1_im(inst_5_io_in_1_im),
+    .io_out_0_re(inst_5_io_out_0_re),
+    .io_out_0_im(inst_5_io_out_0_im),
+    .io_out_1_re(inst_5_io_out_1_re),
+    .io_out_1_im(inst_5_io_out_1_im),
+    .io_wn_0_re(inst_5_io_wn_0_re),
+    .io_wn_0_im(inst_5_io_wn_0_im)
+  );
+  ButterflyMul inst_6 ( // @[Modules.scala 287:22]
+    .io_in_0_re(inst_6_io_in_0_re),
+    .io_in_0_im(inst_6_io_in_0_im),
+    .io_in_1_re(inst_6_io_in_1_re),
+    .io_in_1_im(inst_6_io_in_1_im),
+    .io_out_0_re(inst_6_io_out_0_re),
+    .io_out_0_im(inst_6_io_out_0_im),
+    .io_out_1_re(inst_6_io_out_1_re),
+    .io_out_1_im(inst_6_io_out_1_im),
+    .io_wn_0_re(inst_6_io_wn_0_re),
+    .io_wn_0_im(inst_6_io_wn_0_im)
+  );
+  ButterflyMul inst_7 ( // @[Modules.scala 287:22]
+    .io_in_0_re(inst_7_io_in_0_re),
+    .io_in_0_im(inst_7_io_in_0_im),
+    .io_in_1_re(inst_7_io_in_1_re),
+    .io_in_1_im(inst_7_io_in_1_im),
+    .io_out_0_re(inst_7_io_out_0_re),
+    .io_out_0_im(inst_7_io_out_0_im),
+    .io_out_1_re(inst_7_io_out_1_re),
+    .io_out_1_im(inst_7_io_out_1_im),
+    .io_wn_0_re(inst_7_io_wn_0_re),
+    .io_wn_0_im(inst_7_io_wn_0_im)
+  );
+  ButterflyMul inst_8 ( // @[Modules.scala 287:22]
+    .io_in_0_re(inst_8_io_in_0_re),
+    .io_in_0_im(inst_8_io_in_0_im),
+    .io_in_1_re(inst_8_io_in_1_re),
+    .io_in_1_im(inst_8_io_in_1_im),
+    .io_out_0_re(inst_8_io_out_0_re),
+    .io_out_0_im(inst_8_io_out_0_im),
+    .io_out_1_re(inst_8_io_out_1_re),
+    .io_out_1_im(inst_8_io_out_1_im),
+    .io_wn_0_re(inst_8_io_wn_0_re),
+    .io_wn_0_im(inst_8_io_wn_0_im)
+  );
+  ButterflyMul inst_9 ( // @[Modules.scala 287:22]
+    .io_in_0_re(inst_9_io_in_0_re),
+    .io_in_0_im(inst_9_io_in_0_im),
+    .io_in_1_re(inst_9_io_in_1_re),
+    .io_in_1_im(inst_9_io_in_1_im),
+    .io_out_0_re(inst_9_io_out_0_re),
+    .io_out_0_im(inst_9_io_out_0_im),
+    .io_out_1_re(inst_9_io_out_1_re),
+    .io_out_1_im(inst_9_io_out_1_im),
+    .io_wn_0_re(inst_9_io_wn_0_re),
+    .io_wn_0_im(inst_9_io_wn_0_im)
+  );
   ButterflyAdd dataotemp_inst ( // @[Modules.scala 213:22]
     .io_in_0_re(dataotemp_inst_io_in_0_re),
     .io_in_0_im(dataotemp_inst_io_in_0_im),
@@ -1276,87 +2364,360 @@ module FFT(
     .io_out_1_re(dataotemp_inst_io_out_1_re),
     .io_out_1_im(dataotemp_inst_io_out_1_im)
   );
-  Switch inst_1 ( // @[Modules.scala 311:22]
-    .clock(inst_1_clock),
-    .io_in_0_re(inst_1_io_in_0_re),
-    .io_in_0_im(inst_1_io_in_0_im),
-    .io_in_1_re(inst_1_io_in_1_re),
-    .io_in_1_im(inst_1_io_in_1_im),
-    .io_out_0_re(inst_1_io_out_0_re),
-    .io_out_0_im(inst_1_io_out_0_im),
-    .io_out_1_re(inst_1_io_out_1_re),
-    .io_out_1_im(inst_1_io_out_1_im),
-    .io_sel(inst_1_io_sel)
+  ButterflyAdd dataotemp_inst_1 ( // @[Modules.scala 213:22]
+    .io_in_0_re(dataotemp_inst_1_io_in_0_re),
+    .io_in_0_im(dataotemp_inst_1_io_in_0_im),
+    .io_in_1_re(dataotemp_inst_1_io_in_1_re),
+    .io_in_1_im(dataotemp_inst_1_io_in_1_im),
+    .io_out_0_re(dataotemp_inst_1_io_out_0_re),
+    .io_out_0_im(dataotemp_inst_1_io_out_0_im),
+    .io_out_1_re(dataotemp_inst_1_io_out_1_re),
+    .io_out_1_im(dataotemp_inst_1_io_out_1_im)
   );
-  ComplexRecode inst_2 ( // @[Modules.scala 40:22]
-    .io_in_re(inst_2_io_in_re),
-    .io_in_im(inst_2_io_in_im),
-    .io_out_re(inst_2_io_out_re),
-    .io_out_im(inst_2_io_out_im)
+  Exchange exdata_inst ( // @[Modules.scala 331:22]
+    .io_in_0_0_re(exdata_inst_io_in_0_0_re),
+    .io_in_0_0_im(exdata_inst_io_in_0_0_im),
+    .io_in_0_1_re(exdata_inst_io_in_0_1_re),
+    .io_in_0_1_im(exdata_inst_io_in_0_1_im),
+    .io_in_1_0_re(exdata_inst_io_in_1_0_re),
+    .io_in_1_0_im(exdata_inst_io_in_1_0_im),
+    .io_in_1_1_re(exdata_inst_io_in_1_1_re),
+    .io_in_1_1_im(exdata_inst_io_in_1_1_im),
+    .io_out_0_0_re(exdata_inst_io_out_0_0_re),
+    .io_out_0_0_im(exdata_inst_io_out_0_0_im),
+    .io_out_0_1_re(exdata_inst_io_out_0_1_re),
+    .io_out_0_1_im(exdata_inst_io_out_0_1_im),
+    .io_out_1_0_re(exdata_inst_io_out_1_0_re),
+    .io_out_1_0_im(exdata_inst_io_out_1_0_im),
+    .io_out_1_1_re(exdata_inst_io_out_1_1_re),
+    .io_out_1_1_im(exdata_inst_io_out_1_1_im)
   );
-  ComplexRecode inst_3 ( // @[Modules.scala 40:22]
-    .io_in_re(inst_3_io_in_re),
-    .io_in_im(inst_3_io_in_im),
-    .io_out_re(inst_3_io_out_re),
-    .io_out_im(inst_3_io_out_im)
+  Switch inst_10 ( // @[Modules.scala 311:22]
+    .clock(inst_10_clock),
+    .io_in_0_re(inst_10_io_in_0_re),
+    .io_in_0_im(inst_10_io_in_0_im),
+    .io_in_1_re(inst_10_io_in_1_re),
+    .io_in_1_im(inst_10_io_in_1_im),
+    .io_out_0_re(inst_10_io_out_0_re),
+    .io_out_0_im(inst_10_io_out_0_im),
+    .io_out_1_re(inst_10_io_out_1_re),
+    .io_out_1_im(inst_10_io_out_1_im),
+    .io_sel(inst_10_io_sel)
   );
-  ComplexDecode inst_4 ( // @[Modules.scala 56:22]
-    .io_in_re(inst_4_io_in_re),
-    .io_in_im(inst_4_io_in_im),
-    .io_out_re(inst_4_io_out_re),
-    .io_out_im(inst_4_io_out_im)
+  Switch inst_11 ( // @[Modules.scala 311:22]
+    .clock(inst_11_clock),
+    .io_in_0_re(inst_11_io_in_0_re),
+    .io_in_0_im(inst_11_io_in_0_im),
+    .io_in_1_re(inst_11_io_in_1_re),
+    .io_in_1_im(inst_11_io_in_1_im),
+    .io_out_0_re(inst_11_io_out_0_re),
+    .io_out_0_im(inst_11_io_out_0_im),
+    .io_out_1_re(inst_11_io_out_1_re),
+    .io_out_1_im(inst_11_io_out_1_im),
+    .io_sel(inst_11_io_sel)
   );
-  ComplexDecode inst_5 ( // @[Modules.scala 56:22]
-    .io_in_re(inst_5_io_in_re),
-    .io_in_im(inst_5_io_in_im),
-    .io_out_re(inst_5_io_out_re),
-    .io_out_im(inst_5_io_out_im)
+  Switch_2 inst_12 ( // @[Modules.scala 311:22]
+    .clock(inst_12_clock),
+    .io_in_0_re(inst_12_io_in_0_re),
+    .io_in_0_im(inst_12_io_in_0_im),
+    .io_in_1_re(inst_12_io_in_1_re),
+    .io_in_1_im(inst_12_io_in_1_im),
+    .io_out_0_re(inst_12_io_out_0_re),
+    .io_out_0_im(inst_12_io_out_0_im),
+    .io_out_1_re(inst_12_io_out_1_re),
+    .io_out_1_im(inst_12_io_out_1_im),
+    .io_sel(inst_12_io_sel)
   );
-  assign io_dOut_0_re = REG_re; // @[FFT.scala 181:13]
-  assign io_dOut_0_im = REG_im; // @[FFT.scala 181:13]
-  assign io_dOut_1_re = REG_1_re; // @[FFT.scala 181:13]
-  assign io_dOut_1_im = REG_1_im; // @[FFT.scala 181:13]
-  assign io_dout_valid = io_dout_valid_REG == 3'h1; // @[FFT.scala 179:36]
-  assign io_busy = cnt_0 != 3'h0; // @[FFT.scala 114:21]
-  assign inst_io_in_0_re = inst_2_io_out_re; // @[FFT.scala 122:65 170:19]
-  assign inst_io_in_0_im = inst_2_io_out_im; // @[FFT.scala 122:65 170:19]
-  assign inst_io_in_1_re = inst_3_io_out_re; // @[FFT.scala 122:65 170:19]
-  assign inst_io_in_1_im = inst_3_io_out_im; // @[FFT.scala 122:65 170:19]
-  assign inst_io_wn_0_re = _wnList_T[0] ? _wnList_res_re_T_15 : _wnList_res_re_T_7; // @[FFT.scala 104:{12,12}]
-  assign inst_io_wn_0_im = _wnList_T[0] ? _wnList_res_im_T_15 : _wnList_res_im_T_7; // @[FFT.scala 105:{12,12}]
-  assign dataotemp_inst_io_in_0_re = inst_1_io_out_0_re; // @[FFT.scala 122:65 164:54]
-  assign dataotemp_inst_io_in_0_im = inst_1_io_out_0_im; // @[FFT.scala 122:65 164:54]
-  assign dataotemp_inst_io_in_1_re = inst_1_io_out_1_re; // @[FFT.scala 122:65 164:54]
-  assign dataotemp_inst_io_in_1_im = inst_1_io_out_1_im; // @[FFT.scala 122:65 164:54]
-  assign inst_1_clock = clock;
-  assign inst_1_io_in_0_re = inst_io_out_0_re; // @[FFT.scala 123:69 136:19]
-  assign inst_1_io_in_0_im = inst_io_out_0_im; // @[FFT.scala 123:69 136:19]
-  assign inst_1_io_in_1_re = inst_io_out_1_re; // @[FFT.scala 123:69 136:19]
-  assign inst_1_io_in_1_im = inst_io_out_1_im; // @[FFT.scala 123:69 136:19]
-  assign inst_1_io_sel = cnt_0[0]; // @[FFT.scala 163:31]
-  assign inst_2_io_in_re = _T_1[63:32]; // @[FFT.scala 170:91]
-  assign inst_2_io_in_im = _T_1[31:0]; // @[FFT.scala 170:91]
-  assign inst_3_io_in_re = _T_4[63:32]; // @[FFT.scala 170:91]
-  assign inst_3_io_in_im = _T_4[31:0]; // @[FFT.scala 170:91]
-  assign inst_4_io_in_re = _T_7[65:33]; // @[FFT.scala 181:96]
-  assign inst_4_io_in_im = _T_7[32:0]; // @[FFT.scala 181:96]
-  assign inst_5_io_in_re = _T_10[65:33]; // @[FFT.scala 181:96]
-  assign inst_5_io_in_im = _T_10[32:0]; // @[FFT.scala 181:96]
+  Switch_2 inst_13 ( // @[Modules.scala 311:22]
+    .clock(inst_13_clock),
+    .io_in_0_re(inst_13_io_in_0_re),
+    .io_in_0_im(inst_13_io_in_0_im),
+    .io_in_1_re(inst_13_io_in_1_re),
+    .io_in_1_im(inst_13_io_in_1_im),
+    .io_out_0_re(inst_13_io_out_0_re),
+    .io_out_0_im(inst_13_io_out_0_im),
+    .io_out_1_re(inst_13_io_out_1_re),
+    .io_out_1_im(inst_13_io_out_1_im),
+    .io_sel(inst_13_io_sel)
+  );
+  Switch_4 inst_14 ( // @[Modules.scala 311:22]
+    .clock(inst_14_clock),
+    .io_in_0_re(inst_14_io_in_0_re),
+    .io_in_0_im(inst_14_io_in_0_im),
+    .io_in_1_re(inst_14_io_in_1_re),
+    .io_in_1_im(inst_14_io_in_1_im),
+    .io_out_0_re(inst_14_io_out_0_re),
+    .io_out_0_im(inst_14_io_out_0_im),
+    .io_out_1_re(inst_14_io_out_1_re),
+    .io_out_1_im(inst_14_io_out_1_im),
+    .io_sel(inst_14_io_sel)
+  );
+  Switch_4 inst_15 ( // @[Modules.scala 311:22]
+    .clock(inst_15_clock),
+    .io_in_0_re(inst_15_io_in_0_re),
+    .io_in_0_im(inst_15_io_in_0_im),
+    .io_in_1_re(inst_15_io_in_1_re),
+    .io_in_1_im(inst_15_io_in_1_im),
+    .io_out_0_re(inst_15_io_out_0_re),
+    .io_out_0_im(inst_15_io_out_0_im),
+    .io_out_1_re(inst_15_io_out_1_re),
+    .io_out_1_im(inst_15_io_out_1_im),
+    .io_sel(inst_15_io_sel)
+  );
+  Switch_6 inst_16 ( // @[Modules.scala 311:22]
+    .clock(inst_16_clock),
+    .io_in_0_re(inst_16_io_in_0_re),
+    .io_in_0_im(inst_16_io_in_0_im),
+    .io_in_1_re(inst_16_io_in_1_re),
+    .io_in_1_im(inst_16_io_in_1_im),
+    .io_out_0_re(inst_16_io_out_0_re),
+    .io_out_0_im(inst_16_io_out_0_im),
+    .io_out_1_re(inst_16_io_out_1_re),
+    .io_out_1_im(inst_16_io_out_1_im),
+    .io_sel(inst_16_io_sel)
+  );
+  Switch_6 inst_17 ( // @[Modules.scala 311:22]
+    .clock(inst_17_clock),
+    .io_in_0_re(inst_17_io_in_0_re),
+    .io_in_0_im(inst_17_io_in_0_im),
+    .io_in_1_re(inst_17_io_in_1_re),
+    .io_in_1_im(inst_17_io_in_1_im),
+    .io_out_0_re(inst_17_io_out_0_re),
+    .io_out_0_im(inst_17_io_out_0_im),
+    .io_out_1_re(inst_17_io_out_1_re),
+    .io_out_1_im(inst_17_io_out_1_im),
+    .io_sel(inst_17_io_sel)
+  );
+  ComplexRecode inst_18 ( // @[Modules.scala 40:22]
+    .io_in_re(inst_18_io_in_re),
+    .io_in_im(inst_18_io_in_im),
+    .io_out_re(inst_18_io_out_re),
+    .io_out_im(inst_18_io_out_im)
+  );
+  ComplexRecode inst_19 ( // @[Modules.scala 40:22]
+    .io_in_re(inst_19_io_in_re),
+    .io_in_im(inst_19_io_in_im),
+    .io_out_re(inst_19_io_out_re),
+    .io_out_im(inst_19_io_out_im)
+  );
+  ComplexRecode inst_20 ( // @[Modules.scala 40:22]
+    .io_in_re(inst_20_io_in_re),
+    .io_in_im(inst_20_io_in_im),
+    .io_out_re(inst_20_io_out_re),
+    .io_out_im(inst_20_io_out_im)
+  );
+  ComplexRecode inst_21 ( // @[Modules.scala 40:22]
+    .io_in_re(inst_21_io_in_re),
+    .io_in_im(inst_21_io_in_im),
+    .io_out_re(inst_21_io_out_re),
+    .io_out_im(inst_21_io_out_im)
+  );
+  ComplexDecode inst_22 ( // @[Modules.scala 56:22]
+    .io_in_re(inst_22_io_in_re),
+    .io_in_im(inst_22_io_in_im),
+    .io_out_re(inst_22_io_out_re),
+    .io_out_im(inst_22_io_out_im)
+  );
+  ComplexDecode inst_23 ( // @[Modules.scala 56:22]
+    .io_in_re(inst_23_io_in_re),
+    .io_in_im(inst_23_io_in_im),
+    .io_out_re(inst_23_io_out_re),
+    .io_out_im(inst_23_io_out_im)
+  );
+  ComplexDecode inst_24 ( // @[Modules.scala 56:22]
+    .io_in_re(inst_24_io_in_re),
+    .io_in_im(inst_24_io_in_im),
+    .io_out_re(inst_24_io_out_re),
+    .io_out_im(inst_24_io_out_im)
+  );
+  ComplexDecode inst_25 ( // @[Modules.scala 56:22]
+    .io_in_re(inst_25_io_in_re),
+    .io_in_im(inst_25_io_in_im),
+    .io_out_re(inst_25_io_out_re),
+    .io_out_im(inst_25_io_out_im)
+  );
+  assign io_dOut_0_re = REG_2_re; // @[FFT.scala 181:13]
+  assign io_dOut_0_im = REG_2_im; // @[FFT.scala 181:13]
+  assign io_dOut_1_re = REG_3_re; // @[FFT.scala 181:13]
+  assign io_dOut_1_im = REG_3_im; // @[FFT.scala 181:13]
+  assign io_dOut_2_re = REG_4_re; // @[FFT.scala 181:13]
+  assign io_dOut_2_im = REG_4_im; // @[FFT.scala 181:13]
+  assign io_dOut_3_re = REG_5_re; // @[FFT.scala 181:13]
+  assign io_dOut_3_im = REG_5_im; // @[FFT.scala 181:13]
+  assign io_dout_valid = io_dout_valid_REG == 6'h10; // @[FFT.scala 179:36]
+  assign io_busy = cnt_0 != 6'h0; // @[FFT.scala 114:21]
+  assign inst_io_in_0_re = inst_18_io_out_re; // @[FFT.scala 122:65 170:19]
+  assign inst_io_in_0_im = inst_18_io_out_im; // @[FFT.scala 122:65 170:19]
+  assign inst_io_in_1_re = inst_19_io_out_re; // @[FFT.scala 122:65 170:19]
+  assign inst_io_in_1_im = inst_19_io_out_im; // @[FFT.scala 122:65 170:19]
+  assign inst_io_wn_0_re = 5'h1f == _wnList_T[4:0] ? _wnList_res_re_T_255 : _GEN_31; // @[FFT.scala 104:{12,12}]
+  assign inst_io_wn_0_im = 5'h1f == _wnList_T[4:0] ? _wnList_res_re_T_143 : _GEN_63; // @[FFT.scala 105:{12,12}]
+  assign inst_1_io_in_0_re = inst_20_io_out_re; // @[FFT.scala 122:65 170:19]
+  assign inst_1_io_in_0_im = inst_20_io_out_im; // @[FFT.scala 122:65 170:19]
+  assign inst_1_io_in_1_re = inst_21_io_out_re; // @[FFT.scala 122:65 170:19]
+  assign inst_1_io_in_1_im = inst_21_io_out_im; // @[FFT.scala 122:65 170:19]
+  assign inst_1_io_wn_0_re = 5'h1f == _wnList_T_3[4:0] ? _wnList_res_re_T_255 : _GEN_95; // @[FFT.scala 104:{12,12}]
+  assign inst_1_io_wn_0_im = 5'h1f == _wnList_T_3[4:0] ? _wnList_res_re_T_143 : _GEN_127; // @[FFT.scala 105:{12,12}]
+  assign inst_2_io_in_0_re = REG__0_re; // @[FFT.scala 122:65 157:57]
+  assign inst_2_io_in_0_im = REG__0_im; // @[FFT.scala 122:65 157:57]
+  assign inst_2_io_in_1_re = REG__1_re; // @[FFT.scala 122:65 157:57]
+  assign inst_2_io_in_1_im = REG__1_im; // @[FFT.scala 122:65 157:57]
+  assign inst_2_io_wn_0_re = 4'hf == _wnList_T_4[3:0] ? _wnList_res_re_T_247 : _GEN_143; // @[FFT.scala 104:{12,12}]
+  assign inst_2_io_wn_0_im = 4'hf == _wnList_T_4[3:0] ? _wnList_res_re_T_151 : _GEN_159; // @[FFT.scala 105:{12,12}]
+  assign inst_3_io_in_0_re = REG_1_0_re; // @[FFT.scala 122:65 157:57]
+  assign inst_3_io_in_0_im = REG_1_0_im; // @[FFT.scala 122:65 157:57]
+  assign inst_3_io_in_1_re = REG_1_1_re; // @[FFT.scala 122:65 157:57]
+  assign inst_3_io_in_1_im = REG_1_1_im; // @[FFT.scala 122:65 157:57]
+  assign inst_3_io_wn_0_re = 4'hf == _wnList_T_4[3:0] ? _wnList_res_re_T_247 : _GEN_143; // @[FFT.scala 104:{12,12}]
+  assign inst_3_io_wn_0_im = 4'hf == _wnList_T_4[3:0] ? _wnList_res_re_T_151 : _GEN_159; // @[FFT.scala 105:{12,12}]
+  assign inst_4_io_in_0_re = inst_10_io_out_0_re; // @[FFT.scala 122:65 164:54]
+  assign inst_4_io_in_0_im = inst_10_io_out_0_im; // @[FFT.scala 122:65 164:54]
+  assign inst_4_io_in_1_re = inst_10_io_out_1_re; // @[FFT.scala 122:65 164:54]
+  assign inst_4_io_in_1_im = inst_10_io_out_1_im; // @[FFT.scala 122:65 164:54]
+  assign inst_4_io_wn_0_re = 3'h7 == _wnList_T_8[2:0] ? _wnList_res_re_T_231 : _GEN_199; // @[FFT.scala 104:{12,12}]
+  assign inst_4_io_wn_0_im = 3'h7 == _wnList_T_8[2:0] ? _wnList_res_re_T_167 : _GEN_207; // @[FFT.scala 105:{12,12}]
+  assign inst_5_io_in_0_re = inst_11_io_out_0_re; // @[FFT.scala 122:65 164:54]
+  assign inst_5_io_in_0_im = inst_11_io_out_0_im; // @[FFT.scala 122:65 164:54]
+  assign inst_5_io_in_1_re = inst_11_io_out_1_re; // @[FFT.scala 122:65 164:54]
+  assign inst_5_io_in_1_im = inst_11_io_out_1_im; // @[FFT.scala 122:65 164:54]
+  assign inst_5_io_wn_0_re = 3'h7 == _wnList_T_8[2:0] ? _wnList_res_re_T_231 : _GEN_199; // @[FFT.scala 104:{12,12}]
+  assign inst_5_io_wn_0_im = 3'h7 == _wnList_T_8[2:0] ? _wnList_res_re_T_167 : _GEN_207; // @[FFT.scala 105:{12,12}]
+  assign inst_6_io_in_0_re = inst_12_io_out_0_re; // @[FFT.scala 122:65 164:54]
+  assign inst_6_io_in_0_im = inst_12_io_out_0_im; // @[FFT.scala 122:65 164:54]
+  assign inst_6_io_in_1_re = inst_12_io_out_1_re; // @[FFT.scala 122:65 164:54]
+  assign inst_6_io_in_1_im = inst_12_io_out_1_im; // @[FFT.scala 122:65 164:54]
+  assign inst_6_io_wn_0_re = 2'h3 == _wnList_T_12[1:0] ? _wnList_res_re_T_199 : _GEN_227; // @[FFT.scala 104:{12,12}]
+  assign inst_6_io_wn_0_im = 2'h3 == _wnList_T_12[1:0] ? _wnList_res_re_T_199 : _GEN_231; // @[FFT.scala 105:{12,12}]
+  assign inst_7_io_in_0_re = inst_13_io_out_0_re; // @[FFT.scala 122:65 164:54]
+  assign inst_7_io_in_0_im = inst_13_io_out_0_im; // @[FFT.scala 122:65 164:54]
+  assign inst_7_io_in_1_re = inst_13_io_out_1_re; // @[FFT.scala 122:65 164:54]
+  assign inst_7_io_in_1_im = inst_13_io_out_1_im; // @[FFT.scala 122:65 164:54]
+  assign inst_7_io_wn_0_re = 2'h3 == _wnList_T_12[1:0] ? _wnList_res_re_T_199 : _GEN_227; // @[FFT.scala 104:{12,12}]
+  assign inst_7_io_wn_0_im = 2'h3 == _wnList_T_12[1:0] ? _wnList_res_re_T_199 : _GEN_231; // @[FFT.scala 105:{12,12}]
+  assign inst_8_io_in_0_re = inst_14_io_out_0_re; // @[FFT.scala 122:65 164:54]
+  assign inst_8_io_in_0_im = inst_14_io_out_0_im; // @[FFT.scala 122:65 164:54]
+  assign inst_8_io_in_1_re = inst_14_io_out_1_re; // @[FFT.scala 122:65 164:54]
+  assign inst_8_io_in_1_im = inst_14_io_out_1_im; // @[FFT.scala 122:65 164:54]
+  assign inst_8_io_wn_0_re = _wnList_T_16[0] ? _wnList_res_re_T_135 : _wnList_res_re_T_7; // @[FFT.scala 104:{12,12}]
+  assign inst_8_io_wn_0_im = _wnList_T_16[0] ? _wnList_res_im_T_135 : _wnList_res_im_T_7; // @[FFT.scala 105:{12,12}]
+  assign inst_9_io_in_0_re = inst_15_io_out_0_re; // @[FFT.scala 122:65 164:54]
+  assign inst_9_io_in_0_im = inst_15_io_out_0_im; // @[FFT.scala 122:65 164:54]
+  assign inst_9_io_in_1_re = inst_15_io_out_1_re; // @[FFT.scala 122:65 164:54]
+  assign inst_9_io_in_1_im = inst_15_io_out_1_im; // @[FFT.scala 122:65 164:54]
+  assign inst_9_io_wn_0_re = _wnList_T_16[0] ? _wnList_res_re_T_135 : _wnList_res_re_T_7; // @[FFT.scala 104:{12,12}]
+  assign inst_9_io_wn_0_im = _wnList_T_16[0] ? _wnList_res_im_T_135 : _wnList_res_im_T_7; // @[FFT.scala 105:{12,12}]
+  assign dataotemp_inst_io_in_0_re = inst_16_io_out_0_re; // @[FFT.scala 122:65 164:54]
+  assign dataotemp_inst_io_in_0_im = inst_16_io_out_0_im; // @[FFT.scala 122:65 164:54]
+  assign dataotemp_inst_io_in_1_re = inst_16_io_out_1_re; // @[FFT.scala 122:65 164:54]
+  assign dataotemp_inst_io_in_1_im = inst_16_io_out_1_im; // @[FFT.scala 122:65 164:54]
+  assign dataotemp_inst_1_io_in_0_re = inst_17_io_out_0_re; // @[FFT.scala 122:65 164:54]
+  assign dataotemp_inst_1_io_in_0_im = inst_17_io_out_0_im; // @[FFT.scala 122:65 164:54]
+  assign dataotemp_inst_1_io_in_1_re = inst_17_io_out_1_re; // @[FFT.scala 122:65 164:54]
+  assign dataotemp_inst_1_io_in_1_im = inst_17_io_out_1_im; // @[FFT.scala 122:65 164:54]
+  assign exdata_inst_io_in_0_0_re = inst_io_out_0_re; // @[FFT.scala 123:69 136:19]
+  assign exdata_inst_io_in_0_0_im = inst_io_out_0_im; // @[FFT.scala 123:69 136:19]
+  assign exdata_inst_io_in_0_1_re = inst_io_out_1_re; // @[FFT.scala 123:69 136:19]
+  assign exdata_inst_io_in_0_1_im = inst_io_out_1_im; // @[FFT.scala 123:69 136:19]
+  assign exdata_inst_io_in_1_0_re = inst_1_io_out_0_re; // @[FFT.scala 123:69 136:19]
+  assign exdata_inst_io_in_1_0_im = inst_1_io_out_0_im; // @[FFT.scala 123:69 136:19]
+  assign exdata_inst_io_in_1_1_re = inst_1_io_out_1_re; // @[FFT.scala 123:69 136:19]
+  assign exdata_inst_io_in_1_1_im = inst_1_io_out_1_im; // @[FFT.scala 123:69 136:19]
+  assign inst_10_clock = clock;
+  assign inst_10_io_in_0_re = inst_2_io_out_0_re; // @[FFT.scala 123:69 136:19]
+  assign inst_10_io_in_0_im = inst_2_io_out_0_im; // @[FFT.scala 123:69 136:19]
+  assign inst_10_io_in_1_re = inst_2_io_out_1_re; // @[FFT.scala 123:69 136:19]
+  assign inst_10_io_in_1_im = inst_2_io_out_1_im; // @[FFT.scala 123:69 136:19]
+  assign inst_10_io_sel = cnt_1[3]; // @[FFT.scala 163:31]
+  assign inst_11_clock = clock;
+  assign inst_11_io_in_0_re = inst_3_io_out_0_re; // @[FFT.scala 123:69 136:19]
+  assign inst_11_io_in_0_im = inst_3_io_out_0_im; // @[FFT.scala 123:69 136:19]
+  assign inst_11_io_in_1_re = inst_3_io_out_1_re; // @[FFT.scala 123:69 136:19]
+  assign inst_11_io_in_1_im = inst_3_io_out_1_im; // @[FFT.scala 123:69 136:19]
+  assign inst_11_io_sel = cnt_1[3]; // @[FFT.scala 163:31]
+  assign inst_12_clock = clock;
+  assign inst_12_io_in_0_re = inst_4_io_out_0_re; // @[FFT.scala 123:69 136:19]
+  assign inst_12_io_in_0_im = inst_4_io_out_0_im; // @[FFT.scala 123:69 136:19]
+  assign inst_12_io_in_1_re = inst_4_io_out_1_re; // @[FFT.scala 123:69 136:19]
+  assign inst_12_io_in_1_im = inst_4_io_out_1_im; // @[FFT.scala 123:69 136:19]
+  assign inst_12_io_sel = cnt_1[2]; // @[FFT.scala 163:31]
+  assign inst_13_clock = clock;
+  assign inst_13_io_in_0_re = inst_5_io_out_0_re; // @[FFT.scala 123:69 136:19]
+  assign inst_13_io_in_0_im = inst_5_io_out_0_im; // @[FFT.scala 123:69 136:19]
+  assign inst_13_io_in_1_re = inst_5_io_out_1_re; // @[FFT.scala 123:69 136:19]
+  assign inst_13_io_in_1_im = inst_5_io_out_1_im; // @[FFT.scala 123:69 136:19]
+  assign inst_13_io_sel = cnt_1[2]; // @[FFT.scala 163:31]
+  assign inst_14_clock = clock;
+  assign inst_14_io_in_0_re = inst_6_io_out_0_re; // @[FFT.scala 123:69 136:19]
+  assign inst_14_io_in_0_im = inst_6_io_out_0_im; // @[FFT.scala 123:69 136:19]
+  assign inst_14_io_in_1_re = inst_6_io_out_1_re; // @[FFT.scala 123:69 136:19]
+  assign inst_14_io_in_1_im = inst_6_io_out_1_im; // @[FFT.scala 123:69 136:19]
+  assign inst_14_io_sel = cnt_1[1]; // @[FFT.scala 163:31]
+  assign inst_15_clock = clock;
+  assign inst_15_io_in_0_re = inst_7_io_out_0_re; // @[FFT.scala 123:69 136:19]
+  assign inst_15_io_in_0_im = inst_7_io_out_0_im; // @[FFT.scala 123:69 136:19]
+  assign inst_15_io_in_1_re = inst_7_io_out_1_re; // @[FFT.scala 123:69 136:19]
+  assign inst_15_io_in_1_im = inst_7_io_out_1_im; // @[FFT.scala 123:69 136:19]
+  assign inst_15_io_sel = cnt_1[1]; // @[FFT.scala 163:31]
+  assign inst_16_clock = clock;
+  assign inst_16_io_in_0_re = inst_8_io_out_0_re; // @[FFT.scala 123:69 136:19]
+  assign inst_16_io_in_0_im = inst_8_io_out_0_im; // @[FFT.scala 123:69 136:19]
+  assign inst_16_io_in_1_re = inst_8_io_out_1_re; // @[FFT.scala 123:69 136:19]
+  assign inst_16_io_in_1_im = inst_8_io_out_1_im; // @[FFT.scala 123:69 136:19]
+  assign inst_16_io_sel = cnt_1[0]; // @[FFT.scala 163:31]
+  assign inst_17_clock = clock;
+  assign inst_17_io_in_0_re = inst_9_io_out_0_re; // @[FFT.scala 123:69 136:19]
+  assign inst_17_io_in_0_im = inst_9_io_out_0_im; // @[FFT.scala 123:69 136:19]
+  assign inst_17_io_in_1_re = inst_9_io_out_1_re; // @[FFT.scala 123:69 136:19]
+  assign inst_17_io_in_1_im = inst_9_io_out_1_im; // @[FFT.scala 123:69 136:19]
+  assign inst_17_io_sel = cnt_1[0]; // @[FFT.scala 163:31]
+  assign inst_18_io_in_re = _T_1[63:32]; // @[FFT.scala 170:91]
+  assign inst_18_io_in_im = _T_1[31:0]; // @[FFT.scala 170:91]
+  assign inst_19_io_in_re = _T_4[63:32]; // @[FFT.scala 170:91]
+  assign inst_19_io_in_im = _T_4[31:0]; // @[FFT.scala 170:91]
+  assign inst_20_io_in_re = _T_7[63:32]; // @[FFT.scala 170:91]
+  assign inst_20_io_in_im = _T_7[31:0]; // @[FFT.scala 170:91]
+  assign inst_21_io_in_re = _T_10[63:32]; // @[FFT.scala 170:91]
+  assign inst_21_io_in_im = _T_10[31:0]; // @[FFT.scala 170:91]
+  assign inst_22_io_in_re = _T_13[65:33]; // @[FFT.scala 181:96]
+  assign inst_22_io_in_im = _T_13[32:0]; // @[FFT.scala 181:96]
+  assign inst_23_io_in_re = _T_16[65:33]; // @[FFT.scala 181:96]
+  assign inst_23_io_in_im = _T_16[32:0]; // @[FFT.scala 181:96]
+  assign inst_24_io_in_re = _T_19[65:33]; // @[FFT.scala 181:96]
+  assign inst_24_io_in_im = _T_19[32:0]; // @[FFT.scala 181:96]
+  assign inst_25_io_in_re = _T_22[65:33]; // @[FFT.scala 181:96]
+  assign inst_25_io_in_im = _T_22[32:0]; // @[FFT.scala 181:96]
   always @(posedge clock) begin
     if (reset) begin // @[FFT.scala 110:46]
-      cnt_0 <= 3'h0; // @[FFT.scala 110:46]
+      cnt_0 <= 6'h0; // @[FFT.scala 110:46]
     end else if (io_din_valid | busy) begin // @[FFT.scala 115:30]
-      if (cnt_0 == 3'h3) begin // @[FFT.scala 116:18]
-        cnt_0 <= 3'h0;
+      if (cnt_0 == 6'h20) begin // @[FFT.scala 116:18]
+        cnt_0 <= 6'h0;
       end else begin
         cnt_0 <= _cnt_0_T_2;
       end
     end
+    if (reset) begin // @[FFT.scala 110:46]
+      cnt_1 <= 6'h0; // @[FFT.scala 110:46]
+    end else begin
+      cnt_1 <= cnt_0; // @[FFT.scala 112:16]
+    end
+    REG__0_re <= exdata_inst_io_out_0_0_re; // @[FFT.scala 157:67]
+    REG__0_im <= exdata_inst_io_out_0_0_im; // @[FFT.scala 157:67]
+    REG__1_re <= exdata_inst_io_out_0_1_re; // @[FFT.scala 157:67]
+    REG__1_im <= exdata_inst_io_out_0_1_im; // @[FFT.scala 157:67]
+    REG_1_0_re <= exdata_inst_io_out_1_0_re; // @[FFT.scala 157:67]
+    REG_1_0_im <= exdata_inst_io_out_1_0_im; // @[FFT.scala 157:67]
+    REG_1_1_re <= exdata_inst_io_out_1_1_re; // @[FFT.scala 157:67]
+    REG_1_1_im <= exdata_inst_io_out_1_1_im; // @[FFT.scala 157:67]
     io_dout_valid_REG <= cnt_0; // @[FFT.scala 179:27]
-    REG_re <= inst_4_io_out_re; // @[FFT.scala 181:64]
-    REG_im <= inst_4_io_out_im; // @[FFT.scala 181:64]
-    REG_1_re <= inst_5_io_out_re; // @[FFT.scala 181:64]
-    REG_1_im <= inst_5_io_out_im; // @[FFT.scala 181:64]
+    REG_2_re <= inst_22_io_out_re; // @[FFT.scala 181:64]
+    REG_2_im <= inst_22_io_out_im; // @[FFT.scala 181:64]
+    REG_3_re <= inst_23_io_out_re; // @[FFT.scala 181:64]
+    REG_3_im <= inst_23_io_out_im; // @[FFT.scala 181:64]
+    REG_4_re <= inst_24_io_out_re; // @[FFT.scala 181:64]
+    REG_4_im <= inst_24_io_out_im; // @[FFT.scala 181:64]
+    REG_5_re <= inst_25_io_out_re; // @[FFT.scala 181:64]
+    REG_5_im <= inst_25_io_out_im; // @[FFT.scala 181:64]
   end
 // Register and memory initialization
 `ifdef RANDOMIZE_GARBAGE_ASSIGN
@@ -1395,17 +2756,43 @@ initial begin
     `endif
 `ifdef RANDOMIZE_REG_INIT
   _RAND_0 = {1{`RANDOM}};
-  cnt_0 = _RAND_0[2:0];
+  cnt_0 = _RAND_0[5:0];
   _RAND_1 = {1{`RANDOM}};
-  io_dout_valid_REG = _RAND_1[2:0];
-  _RAND_2 = {1{`RANDOM}};
-  REG_re = _RAND_2[31:0];
-  _RAND_3 = {1{`RANDOM}};
-  REG_im = _RAND_3[31:0];
-  _RAND_4 = {1{`RANDOM}};
-  REG_1_re = _RAND_4[31:0];
-  _RAND_5 = {1{`RANDOM}};
-  REG_1_im = _RAND_5[31:0];
+  cnt_1 = _RAND_1[5:0];
+  _RAND_2 = {2{`RANDOM}};
+  REG__0_re = _RAND_2[32:0];
+  _RAND_3 = {2{`RANDOM}};
+  REG__0_im = _RAND_3[32:0];
+  _RAND_4 = {2{`RANDOM}};
+  REG__1_re = _RAND_4[32:0];
+  _RAND_5 = {2{`RANDOM}};
+  REG__1_im = _RAND_5[32:0];
+  _RAND_6 = {2{`RANDOM}};
+  REG_1_0_re = _RAND_6[32:0];
+  _RAND_7 = {2{`RANDOM}};
+  REG_1_0_im = _RAND_7[32:0];
+  _RAND_8 = {2{`RANDOM}};
+  REG_1_1_re = _RAND_8[32:0];
+  _RAND_9 = {2{`RANDOM}};
+  REG_1_1_im = _RAND_9[32:0];
+  _RAND_10 = {1{`RANDOM}};
+  io_dout_valid_REG = _RAND_10[5:0];
+  _RAND_11 = {1{`RANDOM}};
+  REG_2_re = _RAND_11[31:0];
+  _RAND_12 = {1{`RANDOM}};
+  REG_2_im = _RAND_12[31:0];
+  _RAND_13 = {1{`RANDOM}};
+  REG_3_re = _RAND_13[31:0];
+  _RAND_14 = {1{`RANDOM}};
+  REG_3_im = _RAND_14[31:0];
+  _RAND_15 = {1{`RANDOM}};
+  REG_4_re = _RAND_15[31:0];
+  _RAND_16 = {1{`RANDOM}};
+  REG_4_im = _RAND_16[31:0];
+  _RAND_17 = {1{`RANDOM}};
+  REG_5_re = _RAND_17[31:0];
+  _RAND_18 = {1{`RANDOM}};
+  REG_5_im = _RAND_18[31:0];
 `endif // RANDOMIZE_REG_INIT
   `endif // RANDOMIZE
 end // initial
@@ -1421,10 +2808,18 @@ module FFTtop(
   input  [31:0] io_dIn_0_im,
   input  [31:0] io_dIn_1_re,
   input  [31:0] io_dIn_1_im,
+  input  [31:0] io_dIn_2_re,
+  input  [31:0] io_dIn_2_im,
+  input  [31:0] io_dIn_3_re,
+  input  [31:0] io_dIn_3_im,
   output [31:0] io_dOut_0_re,
   output [31:0] io_dOut_0_im,
   output [31:0] io_dOut_1_re,
   output [31:0] io_dOut_1_im,
+  output [31:0] io_dOut_2_re,
+  output [31:0] io_dOut_2_im,
+  output [31:0] io_dOut_3_re,
+  output [31:0] io_dOut_3_im,
   input         io_din_valid,
   output        io_dout_valid,
   output        io_busy
@@ -1435,10 +2830,18 @@ module FFTtop(
   wire [31:0] fft_io_dIn_0_im; // @[Top.scala 15:19]
   wire [31:0] fft_io_dIn_1_re; // @[Top.scala 15:19]
   wire [31:0] fft_io_dIn_1_im; // @[Top.scala 15:19]
+  wire [31:0] fft_io_dIn_2_re; // @[Top.scala 15:19]
+  wire [31:0] fft_io_dIn_2_im; // @[Top.scala 15:19]
+  wire [31:0] fft_io_dIn_3_re; // @[Top.scala 15:19]
+  wire [31:0] fft_io_dIn_3_im; // @[Top.scala 15:19]
   wire [31:0] fft_io_dOut_0_re; // @[Top.scala 15:19]
   wire [31:0] fft_io_dOut_0_im; // @[Top.scala 15:19]
   wire [31:0] fft_io_dOut_1_re; // @[Top.scala 15:19]
   wire [31:0] fft_io_dOut_1_im; // @[Top.scala 15:19]
+  wire [31:0] fft_io_dOut_2_re; // @[Top.scala 15:19]
+  wire [31:0] fft_io_dOut_2_im; // @[Top.scala 15:19]
+  wire [31:0] fft_io_dOut_3_re; // @[Top.scala 15:19]
+  wire [31:0] fft_io_dOut_3_im; // @[Top.scala 15:19]
   wire  fft_io_din_valid; // @[Top.scala 15:19]
   wire  fft_io_dout_valid; // @[Top.scala 15:19]
   wire  fft_io_busy; // @[Top.scala 15:19]
@@ -1449,10 +2852,18 @@ module FFTtop(
     .io_dIn_0_im(fft_io_dIn_0_im),
     .io_dIn_1_re(fft_io_dIn_1_re),
     .io_dIn_1_im(fft_io_dIn_1_im),
+    .io_dIn_2_re(fft_io_dIn_2_re),
+    .io_dIn_2_im(fft_io_dIn_2_im),
+    .io_dIn_3_re(fft_io_dIn_3_re),
+    .io_dIn_3_im(fft_io_dIn_3_im),
     .io_dOut_0_re(fft_io_dOut_0_re),
     .io_dOut_0_im(fft_io_dOut_0_im),
     .io_dOut_1_re(fft_io_dOut_1_re),
     .io_dOut_1_im(fft_io_dOut_1_im),
+    .io_dOut_2_re(fft_io_dOut_2_re),
+    .io_dOut_2_im(fft_io_dOut_2_im),
+    .io_dOut_3_re(fft_io_dOut_3_re),
+    .io_dOut_3_im(fft_io_dOut_3_im),
     .io_din_valid(fft_io_din_valid),
     .io_dout_valid(fft_io_dout_valid),
     .io_busy(fft_io_busy)
@@ -1461,6 +2872,10 @@ module FFTtop(
   assign io_dOut_0_im = fft_io_dOut_0_im; // @[Top.scala 27:13]
   assign io_dOut_1_re = fft_io_dOut_1_re; // @[Top.scala 27:13]
   assign io_dOut_1_im = fft_io_dOut_1_im; // @[Top.scala 27:13]
+  assign io_dOut_2_re = fft_io_dOut_2_re; // @[Top.scala 27:13]
+  assign io_dOut_2_im = fft_io_dOut_2_im; // @[Top.scala 27:13]
+  assign io_dOut_3_re = fft_io_dOut_3_re; // @[Top.scala 27:13]
+  assign io_dOut_3_im = fft_io_dOut_3_im; // @[Top.scala 27:13]
   assign io_dout_valid = fft_io_dout_valid; // @[Top.scala 28:19]
   assign io_busy = fft_io_busy; // @[Top.scala 29:13]
   assign fft_clock = clock;
@@ -1469,5 +2884,9 @@ module FFTtop(
   assign fft_io_dIn_0_im = io_dIn_0_im; // @[Top.scala 16:14]
   assign fft_io_dIn_1_re = io_dIn_1_re; // @[Top.scala 16:14]
   assign fft_io_dIn_1_im = io_dIn_1_im; // @[Top.scala 16:14]
+  assign fft_io_dIn_2_re = io_dIn_2_re; // @[Top.scala 16:14]
+  assign fft_io_dIn_2_im = io_dIn_2_im; // @[Top.scala 16:14]
+  assign fft_io_dIn_3_re = io_dIn_3_re; // @[Top.scala 16:14]
+  assign fft_io_dIn_3_im = io_dIn_3_im; // @[Top.scala 16:14]
   assign fft_io_din_valid = io_din_valid; // @[Top.scala 17:20]
 endmodule

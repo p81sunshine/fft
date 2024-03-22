@@ -1244,16 +1244,17 @@ module FFT(
   wire [63:0] _T_1 = {io_dIn_0_re,io_dIn_0_im}; // @[FFT.scala 170:91]
   wire [63:0] _T_4 = {io_dIn_1_re,io_dIn_1_im}; // @[FFT.scala 170:91]
   reg [2:0] io_dout_valid_REG; // @[FFT.scala 179:27]
+  wire  _T_8 = ~reset; // @[FFT.scala 182:9]
   wire [32:0] datao_0_re = dataotemp_inst_io_out_0_re; // @[FFT.scala 124:22 141:9]
   wire [32:0] datao_0_im = dataotemp_inst_io_out_0_im; // @[FFT.scala 124:22 141:9]
-  wire [65:0] _T_7 = {datao_0_re,datao_0_im}; // @[FFT.scala 181:96]
-  reg [31:0] REG_re; // @[FFT.scala 181:64]
-  reg [31:0] REG_im; // @[FFT.scala 181:64]
+  wire [65:0] _T_11 = {datao_0_re,datao_0_im}; // @[FFT.scala 185:96]
+  reg [31:0] REG_re; // @[FFT.scala 185:64]
+  reg [31:0] REG_im; // @[FFT.scala 185:64]
   wire [32:0] datao_1_re = dataotemp_inst_io_out_1_re; // @[FFT.scala 124:22 141:9]
   wire [32:0] datao_1_im = dataotemp_inst_io_out_1_im; // @[FFT.scala 124:22 141:9]
-  wire [65:0] _T_10 = {datao_1_re,datao_1_im}; // @[FFT.scala 181:96]
-  reg [31:0] REG_1_re; // @[FFT.scala 181:64]
-  reg [31:0] REG_1_im; // @[FFT.scala 181:64]
+  wire [65:0] _T_14 = {datao_1_re,datao_1_im}; // @[FFT.scala 185:96]
+  reg [31:0] REG_1_re; // @[FFT.scala 185:64]
+  reg [31:0] REG_1_im; // @[FFT.scala 185:64]
   ButterflyMul inst ( // @[Modules.scala 287:22]
     .io_in_0_re(inst_io_in_0_re),
     .io_in_0_im(inst_io_in_0_im),
@@ -1312,10 +1313,10 @@ module FFT(
     .io_out_re(inst_5_io_out_re),
     .io_out_im(inst_5_io_out_im)
   );
-  assign io_dOut_0_re = REG_re; // @[FFT.scala 181:13]
-  assign io_dOut_0_im = REG_im; // @[FFT.scala 181:13]
-  assign io_dOut_1_re = REG_1_re; // @[FFT.scala 181:13]
-  assign io_dOut_1_im = REG_1_im; // @[FFT.scala 181:13]
+  assign io_dOut_0_re = REG_re; // @[FFT.scala 185:13]
+  assign io_dOut_0_im = REG_im; // @[FFT.scala 185:13]
+  assign io_dOut_1_re = REG_1_re; // @[FFT.scala 185:13]
+  assign io_dOut_1_im = REG_1_im; // @[FFT.scala 185:13]
   assign io_dout_valid = io_dout_valid_REG == 3'h1; // @[FFT.scala 179:36]
   assign io_busy = cnt_0 != 3'h0; // @[FFT.scala 114:21]
   assign inst_io_in_0_re = inst_2_io_out_re; // @[FFT.scala 122:65 170:19]
@@ -1338,10 +1339,10 @@ module FFT(
   assign inst_2_io_in_im = _T_1[31:0]; // @[FFT.scala 170:91]
   assign inst_3_io_in_re = _T_4[63:32]; // @[FFT.scala 170:91]
   assign inst_3_io_in_im = _T_4[31:0]; // @[FFT.scala 170:91]
-  assign inst_4_io_in_re = _T_7[65:33]; // @[FFT.scala 181:96]
-  assign inst_4_io_in_im = _T_7[32:0]; // @[FFT.scala 181:96]
-  assign inst_5_io_in_re = _T_10[65:33]; // @[FFT.scala 181:96]
-  assign inst_5_io_in_im = _T_10[32:0]; // @[FFT.scala 181:96]
+  assign inst_4_io_in_re = _T_11[65:33]; // @[FFT.scala 185:96]
+  assign inst_4_io_in_im = _T_11[32:0]; // @[FFT.scala 185:96]
+  assign inst_5_io_in_re = _T_14[65:33]; // @[FFT.scala 185:96]
+  assign inst_5_io_in_im = _T_14[32:0]; // @[FFT.scala 185:96]
   always @(posedge clock) begin
     if (reset) begin // @[FFT.scala 110:46]
       cnt_0 <= 3'h0; // @[FFT.scala 110:46]
@@ -1353,10 +1354,98 @@ module FFT(
       end
     end
     io_dout_valid_REG <= cnt_0; // @[FFT.scala 179:27]
-    REG_re <= inst_4_io_out_re; // @[FFT.scala 181:64]
-    REG_im <= inst_4_io_out_im; // @[FFT.scala 181:64]
-    REG_1_re <= inst_5_io_out_re; // @[FFT.scala 181:64]
-    REG_1_im <= inst_5_io_out_im; // @[FFT.scala 181:64]
+    REG_re <= inst_4_io_out_re; // @[FFT.scala 185:64]
+    REG_im <= inst_4_io_out_im; // @[FFT.scala 185:64]
+    REG_1_re <= inst_5_io_out_re; // @[FFT.scala 185:64]
+    REG_1_im <= inst_5_io_out_im; // @[FFT.scala 185:64]
+    `ifndef SYNTHESIS
+    `ifdef PRINTF_COND
+      if (`PRINTF_COND) begin
+    `endif
+        if (~reset) begin
+          $fwrite(32'h80000002,"dout_valid is %d\n",io_dout_valid); // @[FFT.scala 182:9]
+        end
+    `ifdef PRINTF_COND
+      end
+    `endif
+    `endif // SYNTHESIS
+    `ifndef SYNTHESIS
+    `ifdef PRINTF_COND
+      if (`PRINTF_COND) begin
+    `endif
+        if (_T_8) begin
+          $fwrite(32'h80000002,"cnt is %d\n",cnt_0); // @[FFT.scala 183:9]
+        end
+    `ifdef PRINTF_COND
+      end
+    `endif
+    `endif // SYNTHESIS
+    `ifndef SYNTHESIS
+    `ifdef PRINTF_COND
+      if (`PRINTF_COND) begin
+    `endif
+        if (_T_8) begin
+          $fwrite(32'h80000002,"the din is %d\n",io_dIn_0_re); // @[FFT.scala 192:11]
+        end
+    `ifdef PRINTF_COND
+      end
+    `endif
+    `endif // SYNTHESIS
+    `ifndef SYNTHESIS
+    `ifdef PRINTF_COND
+      if (`PRINTF_COND) begin
+    `endif
+        if (_T_8) begin
+          $fwrite(32'h80000002,"din_valid is %d\n",io_din_valid); // @[FFT.scala 193:11]
+        end
+    `ifdef PRINTF_COND
+      end
+    `endif
+    `endif // SYNTHESIS
+    `ifndef SYNTHESIS
+    `ifdef PRINTF_COND
+      if (`PRINTF_COND) begin
+    `endif
+        if (_T_8) begin
+          $fwrite(32'h80000002,"the din is %d\n",io_dIn_1_re); // @[FFT.scala 192:11]
+        end
+    `ifdef PRINTF_COND
+      end
+    `endif
+    `endif // SYNTHESIS
+    `ifndef SYNTHESIS
+    `ifdef PRINTF_COND
+      if (`PRINTF_COND) begin
+    `endif
+        if (_T_8) begin
+          $fwrite(32'h80000002,"din_valid is %d\n",io_din_valid); // @[FFT.scala 193:11]
+        end
+    `ifdef PRINTF_COND
+      end
+    `endif
+    `endif // SYNTHESIS
+    `ifndef SYNTHESIS
+    `ifdef PRINTF_COND
+      if (`PRINTF_COND) begin
+    `endif
+        if (_T_8) begin
+          $fwrite(32'h80000002,"the dout is %d\n",io_dOut_0_re); // @[FFT.scala 197:11]
+        end
+    `ifdef PRINTF_COND
+      end
+    `endif
+    `endif // SYNTHESIS
+    `ifndef SYNTHESIS
+    `ifdef PRINTF_COND
+      if (`PRINTF_COND) begin
+    `endif
+        if (_T_8) begin
+          $fwrite(32'h80000002,"the dout is %d\n",io_dOut_1_re); // @[FFT.scala 197:11]
+        end
+    `ifdef PRINTF_COND
+      end
+    `endif
+    `endif // SYNTHESIS
   end
 // Register and memory initialization
 `ifdef RANDOMIZE_GARBAGE_ASSIGN
