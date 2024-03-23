@@ -9,9 +9,6 @@ import chisel3.stage.ChiselStage
 * Parameters:
 	- signal_sample_addr (64-bit)
 */
-/*
-Q: Can not generate verilog correctly.
-*/
 
 class fft_wrap extends Module with Config{
 	val io = IO(new Bundle{
@@ -108,6 +105,12 @@ class fft_wrap extends Module with Config{
 	}
 
 	
+	// Wait for FFT computing
+	// res
+
+	val s3_1 :: s3_2 :: s3_3 :: Nil = Enum(3)
+	val state3 = RegInit(s3_1)
+
 
 	// state machine 2: computing
 	val s1 :: s2 :: s3 :: s4  :: Nil = Enum(4)
@@ -128,13 +131,35 @@ class fft_wrap extends Module with Config{
 			}
 		}
 		is(s3){
-			when(io.m_axi_gmem_AWREADY === 1.U && io.m_axi_gmem_AWVALID === 1.U && io.m_axi_gmem_WVALID === 1.U && io.m_axi_gmem_WREADY === 1.U && cnt === 0.U){
+			when(io.m_axi_gmem_AWREADY === 1.U && io.m_axi_gmem_AWVALID === 1.U && io.m_axi_gmem_WVALID === 1.U && io.m_axi_gmem_WREADY === 1.U && state3 === s3_3){
 				state2:=s4
 			}
 		}
 		is(s4){
 			when(state1 === s1_1 ){
 				state2:=s1
+			}
+		}
+	}
+
+    /* Compute process*/
+    val FFTtop_u = Module(new FFT)
+	val last_busy = RegNext(FFTtop_u.io.busy)
+
+	switch(state3){
+		is(s3_1){ // Compute done
+			when(last_busy === 1.U && FFTtop_u.io.busy === 0.U){ 
+				state3 := s3_2;
+			}
+		}
+		is(s3_2) {
+			when(cnt === 0.U){
+				state3 := s3_3
+			}
+		}
+		is(s3_3){
+			when (state2 === s4){
+				state3 := s3_1
 			}
 		}
 	}
@@ -160,7 +185,7 @@ class fft_wrap extends Module with Config{
 		io.m_axi_gmem_RREADY := 0.U
 	}
 	
-	when(state2 === s3){
+	when(state2 === s3 && state3 === s3_3){//算完了，可以写
 		io.m_axi_gmem_AWVALID := 1.U
 		io.m_axi_gmem_WVALID := 1.U
 	}.otherwise{
@@ -197,11 +222,6 @@ class fft_wrap extends Module with Config{
 	io.m_axi_gmem_WSTRB := "hffffffff".U(32.W)
 	io.m_axi_gmem_WLAST  := 1.U
 	
-    /* Compute process*/
-    val FFTtop_u = Module(new FFT)
-	val last_busy = RegNext(FFTtop_u.io.busy)
-	val s3_1 :: s3_2 :: s3_3 :: Nil = Enum(3)
-	val state3 = RegInit(s3_1)
 
 	val din_valid_v = RegInit(0.U(1.W))
 	FFTtop_u.io.din_valid := din_valid_v
@@ -225,19 +245,7 @@ class fft_wrap extends Module with Config{
 	
 	
 
-	// res
-	switch(state3){
-		is(s3_1){ // Compute done
-			when(last_busy === 1.U && FFTtop_u.io.busy === 0.U){ 
-				state3 := s3_2;
-			}
-		}
-		is(s3_2) {
-			when(cnt === 0.U){
-				state3 := s3_3
-			}
-		}
-	}
+
 	val vec_entry = RegInit(VecInit(Seq.fill(8)(0.U(32.W))))
 	/* WB */
 	when (state3 === s3_2 && state2 === s3){ {
