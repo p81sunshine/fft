@@ -1,3 +1,6 @@
+`timescale 1ns / 1ps
+
+
 module fft_wrap_testbench;
 
 // Declare the inputs and outputs of fft_wrap module
@@ -12,21 +15,22 @@ wire [63:0] io_m_axi_gmem_AWADDR;
 wire [7:0] io_m_axi_gmem_AWLEN;
 wire [2:0] io_m_axi_gmem_AWSIZE;
 wire [1:0] io_m_axi_gmem_AWBURST, io_m_axi_gmem_AWLOCK;
-wire [3:0] io_m_axi_gmem_AWREGION, io_m_axi_gmem_AWCACHE, io_m_axi_gmem_AWPROT, io_m_axi_gmem_AWQOS;
+wire [3:0] io_m_axi_gmem_AWREGION, io_m_axi_gmem_AWCACHE,  io_m_axi_gmem_AWQOS;
+wire [2:0] io_m_axi_gmem_AWPROT, io_m_axi_gmem_ARPROT;
 wire io_m_axi_gmem_AWVALID;
-wire io_m_axi_gmem_AWREADY;
+reg io_m_axi_gmem_AWREADY;
 wire [255:0] io_m_axi_gmem_WDATA;
 wire [31:0] io_m_axi_gmem_WSTRB;
 wire io_m_axi_gmem_WLAST, io_m_axi_gmem_WVALID;
-wire io_m_axi_gmem_WREADY;
+reg io_m_axi_gmem_WREADY;
 wire [1:0] io_m_axi_gmem_BRESP;
-wire io_m_axi_gmem_BVALID;
+reg io_m_axi_gmem_BVALID;
 wire io_m_axi_gmem_BREADY;
 wire [63:0] io_m_axi_gmem_ARADDR;
 wire [7:0] io_m_axi_gmem_ARLEN;
 wire [2:0] io_m_axi_gmem_ARSIZE;
 wire [1:0] io_m_axi_gmem_ARBURST, io_m_axi_gmem_ARLOCK;
-wire [3:0] io_m_axi_gmem_ARREGION, io_m_axi_gmem_ARCACHE, io_m_axi_gmem_ARPROT, io_m_axi_gmem_ARQOS;
+wire [3:0] io_m_axi_gmem_ARREGION, io_m_axi_gmem_ARCACHE,  io_m_axi_gmem_ARQOS;
 wire io_m_axi_gmem_ARVALID;
 reg io_m_axi_gmem_ARREADY;
 reg [255:0] io_m_axi_gmem_RDATA;
@@ -109,7 +113,7 @@ initial begin
     io_m_axi_gmem_ARREADY = 1'b1;//传输数据地址
     // 给我地址，我传输数据给他们
     // 传的数据
-    for (int i = 0; i < 16; i = i + 1) begin
+    for (integer i = 0; i < 16; i = i + 1) begin
         #10 //传输实际的FFT的数据
         io_m_axi_gmem_RVALID = 1'b1;
         io_m_axi_gmem_RDATA = {mem[i],mem[i+1],mem[i+2],mem[i+3],mem[i+4],mem[i+5],mem[i+6],mem[i+7]};
@@ -118,6 +122,8 @@ initial begin
         end
     end
     #10
+    io_m_axi_gmem_AWREADY = 1'b1;
+    io_m_axi_gmem_WREADY = 1'b1;
     // Drive the AXI interface with some test patterns (e.g., write-read operation)
 end
 
