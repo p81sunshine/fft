@@ -24,18 +24,24 @@ import chisel3.stage.ChiselStage
 description :
 	data sample vector : 64 * (32 + 32) bit
 	This module implements a 64-point FFT module
+	The input is the address of the 64 complex numbers with real and imaginary parts being IEEE 32bit single precision floating point numbers
+
 pargs:
 | vector address(64bit) |
 
 ags_len: 8 byte (constant)
-such as:
-vaector address: 0x0000000000000000
-vector: 
-256'h0000000100000002000000030000000400000005000000060000000700000008;
-256'h0000000100000002000000030000000400000005000000060000000700000008;
 
-reduce result:
-256'h000000020000000400000006000000080000000a0000000c0000000e00000010;	            
+
+* for example:
+	* Assume the first input data point is 1+2j and the vector address is 0x0
+	* address 0x0-0x3: 00111111100000000000000000000000(1.0)
+	* address 0x4-0x7: 01000000000000000000000000000000(2.0)
+	* ...
+	* ...
+
+    * Assume the value of pres : 0xf0000000 and the output of fft is -1+2j
+	* address 0xf0000000-0xf0000003: 10111111100000000000000000000000(-1.0)
+	* address 0xf0000004-0xf0000007: 01000000000000000000000000000000(2.0)
 
 
  */
@@ -240,7 +246,7 @@ class fft_wrap extends Module with Config{
 	io.m_axi_gmem_ARBURST := 1.U
 	io.m_axi_gmem_ARCACHE := 0.U
 	/*total:64*8byte*/
-	io.m_axi_gmem_ARLEN  := Mux((state1 === s1_3),((16.U) -1.U ),((arglen >>5.U) -1.U) )
+	io.m_axi_gmem_ARLEN  := Mux((state1 === s1_3),((16.U) -1.U ),(0.U) )
 	io.m_axi_gmem_ARLOCK := 0.U
 	io.m_axi_gmem_ARSIZE := 5.U  // 32 bytes
 	io.m_axi_gmem_ARPROT := 0.U
