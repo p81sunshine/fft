@@ -6,8 +6,17 @@ import chisel3.util.{switch, is}
 
 import chisel3.stage.ChiselStage
 /*
+* This module implement a 64-point FFT module
+* The input is the address of the 64 complex numbers which are IEEE 32bit single precision floating point format
+
+* For example:
+* The first input data point is 1+2j and the address is 0x0
+* address 0x0: 00111111100000000000000000000000(1.0)
+* address 0x4: 01000000000000000000000000000000(2.0)
+* ....
+
 * Parameters:
-	- signal_sample_addr (64-bit)
+	-  (64-bit) address
 */
 
 class fft_wrap extends Module with Config{
@@ -83,6 +92,7 @@ class fft_wrap extends Module with Config{
 				state1:=s1_2 
 			}
 		}
+		// Q:2 Why do not it change?
 		is(s1_2){ // start reading vector addr
 			when(io.m_axi_gmem_RVALID ===1.U && io.m_axi_gmem_RREADY === 1.U && io.m_axi_gmem_RLAST === 1.U){
 				state1:=s1_3 // read donw
@@ -131,7 +141,7 @@ class fft_wrap extends Module with Config{
 			}
 		}
 		is(s3){
-			when(io.m_axi_gmem_AWREADY === 1.U && io.m_axi_gmem_AWVALID === 1.U && io.m_axi_gmem_WVALID === 1.U && io.m_axi_gmem_WREADY === 1.U && state3 === s3_3){
+			when(state3 === s3_3){
 				state2:=s4
 			}
 		}
@@ -146,6 +156,14 @@ class fft_wrap extends Module with Config{
     val FFTtop_u = Module(new FFT)
 	val last_busy = RegNext(FFTtop_u.io.busy)
 
+
+
+
+	val res_r = Wire(UInt(1.W))
+	res_r := (last_busy === 1.U && FFTtop_u.io.busy === 0.U)
+	val res_valid = Wire(UInt(1.W))
+	res_valid := (res_r === 1.U || state3 === s3_2)
+
 	switch(state3){
 		is(s3_1){ // Compute done
 			when(last_busy === 1.U && FFTtop_u.io.busy === 0.U){ 
@@ -153,7 +171,7 @@ class fft_wrap extends Module with Config{
 			}
 		}
 		is(s3_2) {
-			when(cnt === 0.U){
+			when(cnt === 1.U){
 				state3 := s3_3
 			}
 		}
@@ -185,7 +203,7 @@ class fft_wrap extends Module with Config{
 		io.m_axi_gmem_RREADY := 0.U
 	}
 	
-	when(state2 === s3 && state3 === s3_3){//算完了，可以写
+	when(state2 === s3 && state3 === s3_2){//算完了，可以写
 		io.m_axi_gmem_AWVALID := 1.U
 		io.m_axi_gmem_WVALID := 1.U
 	}.otherwise{
@@ -220,17 +238,20 @@ class fft_wrap extends Module with Config{
 
 	io.m_axi_gmem_WDATA  := result
 	io.m_axi_gmem_WSTRB := "hffffffff".U(32.W)
-	io.m_axi_gmem_WLAST  := 1.U
+	val wlast = RegInit(0.U(1.W))
+	io.m_axi_gmem_WLAST  := wlast
 	
 
-	val din_valid_v = RegInit(0.U(1.W))
+	val din_valid_v = Wire(UInt(1.W))
 	FFTtop_u.io.din_valid := din_valid_v
-    when((state2 === s2 )&& io.m_axi_gmem_RREADY === 1.U && io.m_axi_gmem_RVALID === 1.U){
-		when(din_valid_v === 0.U){
-			din_valid_v := 1.U}
-		.otherwise{
-			din_valid_v := 0.U}
+	val is_first_in = RegInit(1.U(1.W))
+    when(din_valid_v === 1.U && state2 === s2){
+		is_first_in := 0.U
     }
+	din_valid_v :=  ((state2 === s2 )&& io.m_axi_gmem_RREADY === 1.U && io.m_axi_gmem_RVALID === 1.U)  
+	when(state2 === s3){
+		is_first_in := 1.U
+	}
 
 	val re1 = RegInit(32.U(32.W))
 	val im1 = RegInit(0.U(32.W))
@@ -248,7 +269,8 @@ class fft_wrap extends Module with Config{
 
 	val vec_entry = RegInit(VecInit(Seq.fill(8)(0.U(32.W))))
 	/* WB */
-	when (state3 === s3_2 && state2 === s3){ {
+	// 结果是否正确返回
+	when ((res_valid === 1.U) && state2 === s3){ {
 		vec_entry(0) := FFTtop_u.io.dOut(0).re
 		vec_entry(1) := FFTtop_u.io.dOut(0).im
 		vec_entry(2) := FFTtop_u.io.dOut(1).re
@@ -260,6 +282,11 @@ class fft_wrap extends Module with Config{
 		cnt := cnt - 1.U
 	}}
 
+	when(cnt === 2.U){
+		wlast := 1.U
+	}.otherwise{
+		wlast := 0.U
+	}
 	result := Cat(vec_entry(7),vec_entry(6),vec_entry(5),vec_entry(4),vec_entry(3),vec_entry(2),vec_entry(1),vec_entry(0))
 
 	when(state2 === s1){

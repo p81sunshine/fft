@@ -103,6 +103,7 @@ initial begin
     // Wait for reset to settle
     #10;
     reset = 0;
+    #50
     io_start = 1;
     io_m_axi_gmem_ARREADY = 1'b1;//传输地址
     #10 //读数据的地址
@@ -111,6 +112,7 @@ initial begin
     io_m_axi_gmem_RDATA = 256'h0ff000000; //data addr
     #10
     io_m_axi_gmem_ARREADY = 1'b1;//传输数据地址
+    io_m_axi_gmem_RLAST = 1'b0;
     // 给我地址，我传输数据给他们
     // 传的数据
     for (integer i = 0; i < 16; i = i + 1) begin
