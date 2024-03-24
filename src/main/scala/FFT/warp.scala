@@ -6,7 +6,7 @@ import chisel3.util.{switch, is}
 
 import chisel3.stage.ChiselStage
 /*
-* This module implement a 64-point FFT module
+* This module implements a 64-point FFT module
 * The input is the address of the 64 complex numbers which are IEEE 32bit single precision floating point format
 
 * For example:
@@ -15,9 +15,30 @@ import chisel3.stage.ChiselStage
 * address 0x4: 01000000000000000000000000000000(2.0)
 * ....
 
+
 * Parameters:
 	-  (64-bit) address
 */
+
+/* 
+description :
+	data sample vector : 64 * (32 + 32) bit
+	This module implements a 64-point FFT module
+pargs:
+| vector address(64bit) |
+
+ags_len: 8 byte (constant)
+such as:
+vaector address: 0x0000000000000000
+vector: 
+256'h0000000100000002000000030000000400000005000000060000000700000008;
+256'h0000000100000002000000030000000400000005000000060000000700000008;
+
+reduce result:
+256'h000000020000000400000006000000080000000a0000000c0000000e00000010;	            
+
+
+ */
 
 class fft_wrap extends Module with Config{
 	val io = IO(new Bundle{
